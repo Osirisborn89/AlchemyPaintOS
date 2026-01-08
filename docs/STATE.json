@@ -1,0 +1,31 @@
+{
+  "stamp": "20260105_155324",
+  "repo_path": "C:\\Users\\day_8\\Desktop\\Pproject",
+  "version": "0.1.1",
+  "health": {
+    "blank_brand_paint_non_generic": 0,
+    "duplicate_step_groups": 0,
+    "recipes_with_no_steps": 0,
+    "generic_step_rows_remaining": 22,
+    "tbd_rows_remaining": 0,
+    "missing_targets_md_used": 0,
+    "orphan_steps": 0
+  },
+  "totals": {
+    "factions": 39,
+    "recipes": 401,
+    "steps": 1741,
+    "targets_md": 363,
+    "targets_anchored": 363
+  },
+  "flags": {
+    "core_surface_parity_ok": true
+  },
+  "last_updated_utc": "2026-01-07 17:36:51Z",
+  "recipes": 401,
+  "steps": 1741,
+  "factions": 39,
+  "placeholder_recipes": 0,
+  "placeholder_steps": 0,
+  "audit_verdict": "AUDIT PASS (Core + Truth Pass gates)"
+}

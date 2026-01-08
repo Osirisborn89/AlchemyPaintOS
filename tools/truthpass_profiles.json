@@ -1,0 +1,40 @@
+[
+  {
+    "faction": "TEMPLATE",
+    "recipeIdRegex": "",
+    "includeRecipeIds": [],
+    "targetsLinks": ["https://www.warhammer-community.com/en-gb/topics/painting/"],
+    "schemeNotes": "Replace with scheme notes.",
+    "lookSummary": "Replace with a one-line look summary.",
+    "surfaceMap": [
+      {"match":"armour", "plan":"Armour"},
+      {"match":"weapons", "plan":"WeaponsBlack"},
+      {"match":"metals", "plan":"Metals"},
+      {"match":"lenses", "plan":"LensesRed"},
+      {"match":"gems", "plan":"LensesRed"},
+      {"match":"leather", "plan":"Leather"},
+      {"match":"cloth|robes", "plan":"Details"},
+      {"match":"details", "plan":"Details"},
+      {"match":"bases", "plan":"Bases"}
+    ],
+    "paintRoles": {
+      "ARM_BASE":   [{"Brand":"Citadel","Paint":"Caliban Green"}],
+      "ARM_SHADE":  [{"Brand":"Citadel","Paint":"Nuln Oil"}],
+      "ARM_LAYER":  [{"Brand":"Citadel","Paint":"Warpstone Glow"}],
+      "ARM_HI":     [{"Brand":"Citadel","Paint":"Moot Green"}],
+      "BLK":        [{"Brand":"Citadel","Paint":"Abaddon Black"}],
+      "GREY_HI":    [{"Brand":"Citadel","Paint":"Eshin Grey"}],
+      "RED_BASE":   [{"Brand":"Citadel","Paint":"Mephiston Red"}],
+      "RED_HI":     [{"Brand":"Citadel","Paint":"Evil Sunz Scarlet"}],
+      "STEEL":      [{"Brand":"Citadel","Paint":"Iron Hands Steel"}],
+      "METAL_WASH": [{"Brand":"Citadel","Paint":"Nuln Oil"}],
+      "LEATHER":    [{"Brand":"Citadel","Paint":"Rhinox Hide"}],
+      "LEATHER_WASH":[{"Brand":"Citadel","Paint":"Agrax Earthshade"}],
+      "BONE":       [{"Brand":"Citadel","Paint":"Ushabti Bone"}],
+      "WHITE":      [{"Brand":"Citadel","Paint":"Corax White"}],
+      "DETAIL_SHADE":[{"Brand":"Citadel","Paint":"Agrax Earthshade"}],
+      "BASE_DIRT":  [{"Brand":"Citadel","Paint":"Mournfang Brown"}],
+      "BASE_WASH":  [{"Brand":"Citadel","Paint":"Agrax Earthshade"}]
+    }
+  }
+]

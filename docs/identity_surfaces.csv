@@ -1,0 +1,39 @@
+﻿faction_family,variant_group,identity_surface,priority,why_it_matters,status
+Blood Angels,Blood Angels — Classic,Armour,1,The faction identity,planned
+Blood Angels,Blood Angels — Classic,Lenses & Gems,2,Red lenses pop,planned
+Blood Angels,Blood Angels — Classic,Metals,3,Trim + weapons readability,planned
+Blood Angels,Blood Angels — Death Company,Armour,1,Black armour is the whole point,added
+Blood Angels,Blood Angels — Death Company,Markings (X),2,Signature DC look,planned
+Blood Angels,Blood Angels — Sanguinary Guard,Armour,1,Gold armour identity,planned
+
+Space Wolves,Space Wolves — Classic,Armour,1,Blue-grey armour identity,added
+Space Wolves,Space Wolves — Classic,Pelts/Fur,2,The “Space Wolves” texture moment,added
+Space Wolves,Space Wolves — Classic,Bases (Snow),3,Iconic basing,added
+
+Dark Angels,Dark Angels — Greenwing,Armour,1,Green armour identity,planned
+Dark Angels,Dark Angels — Deathwing,Armour (Bone),1,Deathwing is famous for bone armour,planned
+Dark Angels,Dark Angels — Ravenwing,Armour (Black),1,Ravenwing black identity,planned
+
+Black Templars,Black Templars — Classic,Armour (Black + White),1,Crusader look lives here,planned
+Black Templars,Black Templars — Classic,Tabards/Cloth,2,Cloth contrast is huge,planned
+
+Grey Knights,Grey Knights — Classic,Armour (Silver),1,The faction is shiny silver,planned
+Grey Knights,Grey Knights — Classic,Force Weapon Glow,1,Iconic blue weapon glow,planned
+
+Necrons,Necrons — Classic,Metals,1,90% of the model,planned
+Necrons,Necrons — Classic,Energy Glow,1,The signature effect,planned
+
+Aeldari,Aeldari — Blue,Armour/Primary Panels,1,Defines the scheme,added
+Aeldari,Aeldari — Blue,Gems/Spirit Stones,1,Aeldari identity surface,planned
+Aeldari,Aeldari — Purple,Armour/Primary Panels,1,Defines the scheme,added
+Aeldari,Aeldari — Purple,Gems/Spirit Stones,1,Aeldari identity surface,planned
+
+Orks,Orks — Classic,Skin,1,Orks without good skin look wrong,planned
+Orks,Orks — Classic,Rust/Grime Metals,1,Ramshackle vibe,planned
+Orks,Orks — Goffs,Checks/Markings,1,Goffs = checks,planned
+
+Chaos Space Marines,CSM — Classic,Trim,1,CSM identity is trim control,planned
+Chaos Space Marines,CSM — Black Legion,Armour + Trim,1,Black + gold identity,planned
+
+Emperor's Children,Emperor's Children — Purple+Gold,Armour,1,Purple smoothness matters,added
+Emperor's Children,Emperor's Children — Purple+Gold,Trim (Gold),1,Gold trim defines it,added

@@ -1,0 +1,49 @@
+Paint OS — Final Standard v1 (Roster: 39 factions)
+
+Audit snapshot: 2026-01-07
+Repo path (local): C:\Users\day_8\Desktop\Pproject
+PowerShell: 7.5.4
+
+Totals
+
+Factions: 39
+
+Recipes: 401
+
+Steps: 1741
+
+targets.md files (references/): 321
+
+Anchored (has ≥1 link): 321
+
+Health (must remain green)
+
+Blank recipe_id rows: 0
+
+Duplicate step groups: 0
+
+Blank brand/paint (non-Generic): 0
+
+Orphan steps: 0
+
+Recipes with no steps: 0
+
+TBD rows remaining: 0
+
+Missing targets.md used by recipes: 0
+
+targets.md with no links: 0
+
+Steps with paints NOT in inventory (non-Generic): 0
+
+RecipeIds used by multiple factions: 0
+
+Notes
+
+Placeholder recipes remaining: 0
+
+Placeholder steps remaining: 0
+
+Generic step rows remain by design (e.g., “Texture Paste (any)”, “pick what you want” material steps).
+
+Repo hygiene: nested duplicate folders (data\data, docs\docs, references\references) were quarantined/removed; canonical paths confirmed.
