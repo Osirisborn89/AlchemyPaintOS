@@ -1,526 +1,241 @@
-\# PaintOS / PProject — Handover Capsule
+# AlchemyPaintOS — Handover Capsule
 
-
-
-\*\*Generated:\*\* 2026-01-08 15:46 GMT  
-
-\*\*Repo Path:\*\* C:\\Users\\day\_8\\Desktop\\Pproject  
-
-\*\*PowerShell:\*\* 7.5.4 (no ?? operator)  
-
-\*\*Release Posture:\*\* LOCAL REPO IS TRUTH SOURCE
-
-
+**Generated:** 2026-01-09 14:56 GMT  
+**Repo Path:** https://github.com/Osirisborn89/AlchemyPaintOS  
+**Local Path:** C:\Users\day_8\Desktop\Pproject  
+**Release Posture:** GitHub is TRUTH SOURCE (v1.0.0)
 
 ---
 
-
-
-\## 🎯 Current Health Status (Must Stay GREEN)
-
-
+## 🎯 Current Health Status (Must Stay GREEN)
 
 | Metric | Status | Value |
-
 |--------|--------|-------|
-
-| \*\*Recipes\*\* | ✅ | 401 |
-
-| \*\*Recipe Steps\*\* | ✅ | 1,741 |
-
-| \*\*Factions\*\* | ✅ | 39 |
-
-| \*\*Orphan Steps\*\* | ✅ | 0 |
-
-| \*\*Recipes with No Steps\*\* | ✅ | 0 |
-
-| \*\*Duplicate Step Groups\*\* | ✅ | 0 |
-
-| \*\*TBD Rows\*\* | ✅ | 0 |
-
-| \*\*Blank Brand/Paint (non-Generic)\*\* | ✅ | 0 |
-
-| \*\*RecipeIds Used by Multiple Factions\*\* | ✅ | 0 |
-
-
+| **Recipes** | ✅ | 401 |
+| **Recipe Steps** | ✅ | 1,741 |
+| **Paints in Inventory** | ✅ | 315+ |
+| **Factions** | ✅ | 40 |
+| **Faction Lore Files** | ✅ | 40+ markdown |
+| **Orphan Steps** | ✅ | 0 |
+| **Recipes with No Steps** | ✅ | 0 |
+| **Placeholder Recipes** | ✅ | 0 |
+| **Placeholder Steps** | ✅ | 0 |
+| **TBD Rows** | ✅ | 0 |
 
 ---
 
-
-
-\## ✅ Truth Pass v2 Quality Gates (CURRENT)
-
-
+## ✅ Production Quality Gates (CURRENT)
 
 | Gate | Status | Value |
-
 |------|--------|-------|
-
-| \*\*Placeholder Recipes Remaining\*\* | ✅ | 0 |
-
-| \*\*Placeholder Steps Remaining\*\* | ✅ | 0 |
-
-| \*\*Steps with Paints NOT in Inventory (non-Generic)\*\* | ✅ | 0 |
-
-| \*\*Missing targets.md (used by recipes)\*\* | ✅ | 0 |
-
-| \*\*targets.md with NO links\*\* | ✅ | 0 |
-
-| \*\*Audit Status\*\* | ✅ PASS | Core + Truth Pass gates green |
-
-
+| **Data Integrity** | ✅ PASS | All CSV data validated |
+| **Repo Hygiene** | ✅ PASS | No nested dupes, clean structure |
+| **Documentation** | ✅ PASS | All docs updated |
+| **Frontend Build** | ✅ PASS | MVP Dashboard Live |
+| **Navigation** | ✅ PASS | Home ↔ Lore bidirectional |
+| **Audit Status** | ✅ PASS | All gates green |
 
 ---
 
+## 📋 What We Have Built
 
+### AlchemyPaintOS v1.0.0 — Complete System
 
-\## 📋 What We Are Doing
+**A Warhammer 40K painting reference dashboard with:**
 
+#### Frontend (Live)
+- ✅ **Landing Page** (`index.html`) — Main dashboard
+  - Faction filter dropdown (all 40 factions)
+  - Full-text search across 401 recipes
+  - Recipe cards with metadata (surface, difficulty, finish)
+  - Modal detail view with full step-by-step instructions
+  - Yellow **LORE** button navigates to faction reference
+  
+- ✅ **Lore Page** (`lore.html`) — Faction encyclopedia
+  - 40+ faction tiles with detailed markdown content
+  - Click any faction to view full lore description
+  - Green **HOME** button navigates back to dashboard
+  - Clean dark theme UI with gold/brass accents
 
+#### Data Layer (Production-Ready)
+- ✅ `data/recipes.csv` — 401 painting recipes with metadata
+- ✅ `data/recipe_steps.csv` — 1,741 step-by-step instructions
+- ✅ `data/inventory_export.csv` — 315+ owned paints (source of truth)
+- ✅ `src/lore/` — 40+ faction markdown files with official lore
 
-\### Truth Pass v2 Mission
+#### Backend
+- ✅ `server.py` — Python local server (localhost:8000)
+- ✅ `data-loader.js` — CSV parsing + filtering engine
+- ✅ Design system with CSS variables (dark theme, responsive)
 
-
-
-Align each faction's recipes to \*\*official/curated reference schemes\*\* using \*\*only owned paints\*\* (inventory enforced).
-
-
-
-\*\*Key Rules:\*\*
-
-\- ✅ "Generic" allowed only for material-type steps (texture paste, etc.)
-
-\- ✅ Non-Generic paint MUST be in `inventory\_export.csv`
-
-\- ✅ Every surface should be research-anchored via `targets.md`
-
-\- ✅ Inventory columns: Brand='Brand', Paint='Paint Name'
-
-
-
-\### Big Milestone Reached ✅
-
-
-
-\*\*Truth Pass v2 placeholder cleanup is COMPLETE\*\*
-
-
-
-All remaining Starter Pack / placeholder recipes and placeholder step text have been \*\*eliminated\*\*.  
-
-Quality gates are \*\*green across the full dataset\*\*.
-
-
+#### Navigation
+- ✅ Home ↔ Lore bidirectional navigation
+- ✅ No broken links
+- ✅ Both pages fully functional and synced
 
 ---
 
+## ✅ Completed Work (This Session)
 
+### Navigation & Frontend
+- ✅ Added HOME button to `lore.html` (green, top-right)
+- ✅ Added LORE button to `index.html` (yellow, top-right)
+- ✅ Tested bidirectional navigation (working)
+- ✅ Deployed to GitHub (https://github.com/Osirisborn89/AlchemyPaintOS)
+- ✅ All 61 files synced to repo
 
-\## ✅ Completed Work (This Run)
+### Data Verification
+- ✅ 401 recipes loaded and displaying
+- ✅ 40 factions populated in dropdown
+- ✅ 315+ paints in inventory
+- ✅ All CSV files valid and synced
 
-
-
-\### Early Batches (Confirmed Completed)
-
-
-
-\- ✅ \*\*Adepta Sororitas\*\* — full Truth Pass v2 rewrite + targets patched
-
-\- ✅ \*\*Adeptus Custodes\*\* — full Truth Pass v2 rewrite + polish + targets patched
-
-\- ✅ \*\*Adeptus Mechanicus\*\* — full Truth Pass v2 rewrite + polish + targets patched
-
-\- ✅ \*\*Aeldari\*\* — rewritten + metadata aligned to Truth Pass v2; targets patched
-
-\- ✅ \*\*Aeldari (Blue/Purple)\*\* — glow fixes; targets OK
-
-\- ✅ \*\*Asuryani\*\* — full Truth Pass v2 rewrite + targets patched
-
-\- ✅ \*\*Black Templars\*\* — glow fixed; targets OK
-
-\- ✅ \*\*Blood Angels\*\* — glow fixed; targets OK
-
-\- ✅ \*\*Chaos Daemons\*\* — full Truth Pass v2 rewrite + targets patched
-
-\- ✅ \*\*Chaos Knights\*\* — Truth Pass v2 rewrite + targets OK
-
-
-
-\### Later Batches (Completed After Initial Snapshot)
-
-
-
-\- ✅ \*\*Imperial Knights\*\* — full rewrite fixed (all IK recipe\_ids at 4 steps; gates green)
-
-\- ✅ \*\*Iron Hands\*\* — full rewrite (all IH recipe\_ids at 4 steps; gates green)
-
-\- ✅ \*\*Leagues of Votann\*\* — full rewrite (all LOV recipe\_ids at 4 steps; gates green)
-
-\- ✅ \*\*Orks\*\* — rewrite (incl. "Checks \& Markings" handled; gates green)
-
-\- ✅ \*\*Raven Guard\*\* — full rewrite applied (all RG recipe\_ids at 4 steps; gates green)
-
-\- ✅ \*\*Salamanders\*\* — full rewrite applied (all SAL recipe\_ids at 4 steps; gates green)
-
-\- ✅ \*\*Space Wolves\*\* — Lenses \& Glow placeholder fixed to Truth Pass v2 (SW\_LENSESGLOW\_MIX\_01)
-
-\- ✅ \*\*T'au Empire\*\* — rewrite completed (targets patched; scheme = sept-style ochre + white + teal/green glow)
-
-\- ✅ \*\*Thousand Sons\*\* — full rewrite completed (all TS recipe\_ids at 4 steps)
-
-\- ✅ \*\*Tyranids\*\* — full rewrite completed (all TYR recipe\_ids at 4 steps)
-
-\- ✅ \*\*Ultramarines\*\* — full rewrite completed (all UM recipe\_ids at 4 steps)
-
-\- ✅ \*\*White Scars\*\* — full rewrite completed (all WS recipe\_ids at 4 steps)
-
-\- ✅ \*\*Imperial Agents\*\* — placeholder metadata cleaned (look\_summary updated; placeholder count now 0)
-
-\- ✅ \*\*Ynnari\*\* — completed \*(this was the final remaining placeholder set; counters hit 0/0)\*
-
-
-
-\*\*Total Factions Processed:\*\* 39 | \*\*Total Recipes:\*\* 401 | \*\*Total Steps:\*\* 1,741
-
-
+### Documentation
+- ✅ This HANDOVER.md updated
+- ✅ Project structure documented
+- ✅ Quality gates all green
 
 ---
 
+## 🚀 Next Work (Resume From Here)
 
+### Phase 1: Frontend Polish (Optional)
+- [ ] Add favicon (small shield/Warhammer icon)
+- [ ] Export recipes as PDF
+- [ ] Favorite/bookmark system
+- [ ] Advanced filtering (by paint, by difficulty)
+- [ ] Mobile responsiveness optimization
 
-\## 🔧 Repo Hygiene / Incident Log
+### Phase 2: Feature Expansion
+- [ ] Paint reverse lookup ("What can I paint with Leadbelcher?")
+- [ ] Shopping list generator
+- [ ] Color swatches/palette viewer
+- [ ] User notes per recipe
+- [ ] Painting time tracker
 
-
-
-\### Nested Folder Dupes Fixed ✅
-
-
-
-\*\*Detected and Removed:\*\*
-
-\- ✅ `data\\data` — removed, canonical verified
-
-\- ✅ `docs\\docs` — removed, canonical verified
-
-\- ✅ `references\\references` — removed, canonical verified
-
-
-
-\*\*Approach:\*\*
-
-1\. Quarantine/move dupes out of the way (timestamped quarantine path)
-
-2\. Verify canonical paths remain intact
-
-3\. Diff scan confirmed many mismatches (quarantined copies were older than canonical — expected)
-
-4\. \*\*Current state:\*\* Canonical folder layout is clean (no nested dupes) ✅
-
-
-
-\*\*Project is safe to continue.\*\*
-
-
+### Phase 3: Distribution
+- [ ] Netlify/Vercel deployment (public)
+- [ ] Mobile app wrapper (React Native)
+- [ ] Offline PWA support
+- [ ] Dark/light theme toggle
 
 ---
 
-
-
-\## 🚀 Next Work (Resume From Here)
-
-
-
-\### Phase: Frontend Build
-
-
-
-Now that Truth Pass v2 placeholder cleanup is finished, \*\*transition from "data rescue" to "product build"\*\*.
-
-
-
-\*\*Goal:\*\* Turn the dataset into a usable local dashboard
-
-
-
-\*\*MVP Features:\*\*
-
-\- Faction picker → surface picker → step view (brand/paint/method notes)
-
-\- Show `targets.md` links per surface (research transparency)
-
-\- Search by paint / recipe\_id
-
-\- Optional: "What can I paint with X paint?" reverse lookup
-
-
-
-\*\*Tech Stack (Recommended):\*\*
-
-\- Single HTML file with embedded CSS/JS
-
-\- Load from CSV (no backend needed initially)
-
-\- Responsive design (mobile, tablet, desktop)
-
-\- Real-time search \& filtering
-
-
-
----
-
-
-
-\### Phase: B Accuracy Pass (Later)
-
-
-
-Even though placeholders are gone, do a \*\*later scheme accuracy review\*\* (box art faithfulness) faction-by-faction:
-
-
-
-\- ✅ Keep `targets.md` as the compass
-
-\- ✅ Adjust recipes only when research warrants it
-
-\- ✅ Maintain green gates
-
-\- \*\*Timing:\*\* After frontend MVP is live
-
-
-
----
-
-
-
-\### Ongoing: Documentation Polish
-
-
-
-Keep docs in sync with reality:
-
-
-
-\- \[ ] HANDOVER.md reflects "placeholders = 0" ✅
-
-\- \[ ] MILESTONES.md marks Truth Pass v2 placeholder cleanup complete ✅
-
-\- \[ ] STATUS.md updated with current numbers + next phase ✅
-
-\- \[ ] VERSION.txt reflects v1.0.0 ✅
-
-
-
----
-
-
-
-\## 📖 New Chat Bootstrap
-
-
-
-\### When Starting Fresh in a New Chat:
-
-
-
-1\. \*\*Upload repo zip\*\*
-
-2\. \*\*Tell assistant:\*\*
-
-"Read docs/HANDOVER.md first. Confirm audit gates are green.
-
-Then resume at NEXT WORK."
-
-
+## 🔧 Repo Structure (Clean)
+
+AlchemyPaintOS/
+├── index.html # Landing page (recipes + search)
+├── lore.html # Faction lore encyclopedia
+├── data/
+│ ├── recipes.csv # 401 recipes
+│ ├── recipe_steps.csv # 1,741 steps
+│ └── inventory_export.csv # 315+ paints
+├── src/
+│ ├── lore/ # 40+ faction markdown files
+│ ├── js/ # data-loader.js
+│ ├── styles/ # design-system.css
+│ └── server.py # Local server
+├── docs/ # Documentation
+└── .git/ # Version control
 
 text
 
-3\. \*\*Run audit:\*\*
+---
 
+## 📖 New Chat Bootstrap
+
+### When Starting Fresh in a New Chat:
+
+1. **Upload the repo or link GitHub**
+2. **Tell assistant:** 
+"Read docs/HANDOVER.md first.
+Current status: v1.0.0 frontend complete,
+all data synced, navigation working.
+What should we build next?"
+
+text
+3. **Quick health check:**
 ```powershell
-
-\# Quick health check
-
-$recipes = (Import-Csv "data/recipes/recipes.csv").Count
-
-$steps = (Import-Csv "data/recipes/recipe\_steps.csv").Count
-
-$factions = (Import-Csv "data/recipes/recipes.csv").faction | Select-Object -Unique | Measure-Object | Select-Object -ExpandProperty Count
-
-
-
-Write-Host "Recipes: $recipes"
-
-Write-Host "Steps: $steps"
-
-Write-Host "Factions: $factions"
-
-Paste output and continue
-
-
-
-🔐 Pinned Context — PaintOS Project Charter
-
+# Run locally
+python server.py
+# Visit http://localhost:8000
+# Verify: recipes load, factions appear, navigation works
+🔐 Key Principles
 What This Project Is
 
-PaintOS is a local, home-network dashboard/OS that helps you paint Warhammer factions/armies using only the paints you own.
-
-
-
-What The Repo Contains
-
-Inventory CSV — data/inventory/inventory\_export.csv (single source of truth for owned paints)
-
-
-
-Recipes \& Steps — data/recipes/recipes.csv, data/recipes/recipe\_steps.csv (backend data for future dashboard)
-
-
-
-Research Anchors — references/\*\*/TARGETS/targets.md (per faction/surface, research trail)
-
-
-
-End Goal Dashboard Behavior
-
-Select a faction → returns surface-specific recipes + steps
-
-
-
-Schemes must be faithful to official/curated references (box art / studio schemes)
-
-
-
-Paint choices must use owned paints only (brands can mix)
-
-
-
-"Nearest match" means nearest from owned inventory, never recommend a paint you don't own
-
-
+AlchemyPaintOS is a local dashboard that helps you paint Warhammer factions using only the paints you own.
 
 Non-Negotiable Rules
 
-Inventory CSV is truth — no non-Generic paints outside inventory
+✅ Inventory CSV is truth — no non-Generic paints outside inventory
 
+✅ Navigation is bidirectional (Home ↔ Lore)
 
+✅ All 401 recipes must have steps
 
-Every faction update must be research-anchored — targets.md links first
+✅ All 40 factions must be discoverable
 
+✅ Quality gates stay green (0 placeholders, 0 orphans)
 
+✅ GitHub is the backup, local folder is the working copy
 
-Micro-batches — snapshot → targets patch → rewrite → audit → stop
+Data Integrity
 
+Recipes CSV → recipe_steps CSV (1:many relationship)
 
+Inventory CSV → source of truth for paint availability
 
-Quality gates must stay green — the full list at top of this doc
+Lore markdown → research anchors (one file per faction)
 
-
-
-📊 Current Status Summary
-
-Item	Status
-
-Truth Pass v2 (Placeholder Cleanup)	✅ COMPLETE
-
-Data Audit Gates	✅ GREEN
-
-Repo Hygiene	✅ CLEAN
-
-Documentation	✅ UPDATED
-
-Next Phase	🚀 Frontend Build
-
-Release Status	📦 LOCAL (v1.0.0)
-
+📊 Current Metrics
+Item	Count	Status
+Factions	40	✅ All discoverable
+Recipes	401	✅ All with steps
+Steps	1,741	✅ All linked
+Paints	315+	✅ In inventory
+Lore Files	40+	✅ Markdown
+Navigation Links	2	✅ Working
+Quality Gates	8	✅ All GREEN
 🎯 Quick Reference
-
-Key Files
-
-data/recipes/recipes.csv — All 401 recipes
-
-
-
-data/recipes/recipe\_steps.csv — All 1,741 steps
-
-
-
-data/inventory/inventory\_export.csv — Owned paints (source of truth)
-
-
-
-references/\*\*/TARGETS/targets.md — Research anchors (321 files)
-
-
-
-Key Metrics
-
-Factions: 39
-
-
-
-Recipes: 401
-
-
-
-Steps: 1,741
-
-
-
-Paints: 315+
-
-
-
-targets.md: 321 (all anchored)
-
-
-
-Quality Gates
-
-Placeholders: 0 ✅
-
-
-
-Orphans: 0 ✅
-
-
-
-Duplicates: 0 ✅
-
-
-
-Audit: GREEN ✅
-
-
-
-📝 Notes For Future Self
-
-Placeholders are done — focus shifts to frontend + accuracy
-
-
-
-Don't add paints to recipes without inventory check — gates will catch it
-
-
-
-targets.md is gospel — if recipe disagrees with targets, check targets first
-
-
-
-Micro-batches work — snapshot→patch→rewrite→audit creates good diffs
-
-
-
-Quality gates are your friend — green gates = safe to push
-
-
-
-Last Updated: January 8, 2026, 15:46 GMT
-
-Prepared by: Osirisborn89
-
-Status: READY FOR NEXT PHASE ✅
-
-
-
+Files to Know
+
+index.html — Main dashboard (recipes)
+
+lore.html — Faction reference (lore)
+
+data/recipes.csv — Recipe source
+
+data/recipe_steps.csv — Steps source
+
+data/inventory_export.csv — Paints source
+
+src/lore/ — Faction markdown files
+
+Running Locally
+
+bash
+cd /path/to/AlchemyPaintOS
+python server.py
+# Visit http://localhost:8000
+Git Workflow
+
+bash
+git add .
+git commit -m "Your message"
+git push origin main
+📝 Last Updates
+Date	Update	Status
+2026-01-09 14:50	Navigation implemented (HOME/LORE buttons)	✅ COMPLETE
+2026-01-09 14:48	All files pushed to GitHub	✅ COMPLETE
+2026-01-09 14:42	Frontend dashboard tested	✅ WORKING
+2026-01-09 00:00	Truth Pass v2 placeholder cleanup	✅ COMPLETE
+🏆 Project Status
+text
+╔═══════════════════════════════════════╗
+║   AlchemyPaintOS v1.0.0               ║
+║   Status: PRODUCTION READY ✅         ║
+║   Last Updated: 2026-01-09 14:56 GMT  ║
+║   All Gates: GREEN ✅                 ║
+║   Next Phase: Frontend Polish/Export  ║
+╚═══════════════════════════════════════╝
 For the Emperor! ⚔️🌟
-
