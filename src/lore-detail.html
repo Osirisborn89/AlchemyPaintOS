@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faction Lore - AlchemyPaintOS</title>
+  <link rel="stylesheet" href="../styles/design-system.css">
+  <style>
+    .lore-content {
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .lore-content h1, .lore-content h2, .lore-content h3 {
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-2);
+      color: var(--color-primary);
+    }
+    .lore-content h1 {
+      font-size: 2.5rem;
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: var(--space-2);
+    }
+    .lore-content h2 {
+      font-size: 1.8rem;
+    }
+    .lore-content h3 {
+      font-size: 1.3rem;
+    }
+    .lore-content p {
+      margin: var(--space-2) 0;
+      text-align: justify;
+    }
+    .lore-content ul, .lore-content ol {
+      margin: var(--space-2) 0 var(--space-2) var(--space-4);
+    }
+    .lore-content li {
+      margin: var(--space-1) 0;
+    }
+    .lore-content strong {
+      color: var(--color-primary);
+    }
+    .lore-content em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+    .back-button {
+      display: inline-block;
+      margin-bottom: var(--space-4);
+      padding: 8px 16px;
+      background: var(--color-secondary);
+      border-radius: var(--radius-base);
+      cursor: pointer;
+      transition: background 200ms ease;
+    }
+    .back-button:hover {
+      background: var(--color-secondary-hover);
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header" style="background: var(--bg-secondary); border-bottom: 2px solid var(--color-brass); padding: var(--space-4); position: sticky; top: 0; z-index: 100;">
+    <div style="max-width: 1400px; margin: 0 auto;">
+      <div class="flex" style="justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+        <div>
+          <h1 class="m-0">⚔️ AlchemyPaintOS</h1>
+          <p class="m-0 text-muted text-sm">Warhammer 40K Painting Reference System</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="btn" onclick="window.location.href='/'" style="padding: 6px 16px; font-size: 12px;">🏠 Home</button>
+          <button class="btn" onclick="window.location.href='/lore.html'" style="padding: 6px 16px; font-size: 12px;">📚 Lore</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1400px; margin: 0 auto; padding: var(--space-4);">
+    <div class="back-button" onclick="window.location.href='/lore.html'">← Back to Factions</div>
+    <div class="card" style="padding: var(--space-4);">
+      <div class="lore-content" id="lore-detail"></div>
+    </div>
+  </main>
+
+  <footer style="padding: var(--space-4); color: var(--text-secondary); font-size: 13px; border-top: 1px solid #555;">
+    <div id="footer-status">Loading lore...</div>
+  </footer>
+
+  <script src="../js/lore-data-loader.js"></script>
+  <script>
+    const detailApp = {
+      dataLoader: null,
+
+      async init() {
+        console.log('📖 Loading faction detail...');
+        this.dataLoader = new LoreDataLoader();
+        try {
+          const timestamp = Date.now();
+          const factionData = await fetch(./data/factions_lore.csv?v=+timestamp).then(r => r.text());
+          const loaded = await this.dataLoader.loadFactions(factionData);
+          if (!loaded) throw new Error('Faction loader failed');
+
+          const params = new URLSearchParams(window.location.search);
+          const factionName = params.get('faction');
+          const faction = this.dataLoader.factions.find(f => f.faction === factionName);
+
+          if (!faction) {
+            document.getElementById('lore-detail').innerHTML = '<p class="text-error">Faction not found.</p>';
+            document.getElementById('footer-status').textContent = '✗ Faction not found';
+            return;
+          }
+
+          this.renderDetail(faction);
+          document.getElementById('footer-status').textContent = ✓ Loaded: +faction.faction;
+        } catch (error) {
+          console.error('Init failed:', error);
+          document.getElementById('footer-status').textContent = ✗ Failed: +error.message;
+        }
+      },
+
+      renderDetail(faction) {
+        const container = document.getElementById('lore-detail');
+        const loreHTML = this.markdownToHTML(faction.lore_md);
+        container.innerHTML = loreHTML;
+      },
+
+    markdownToHTML(markdown) {
+  if (!markdown) return '<p>No lore available.</p>';
+
+  // UNESCAPE - handle multiple escape formats
+  markdown = markdown
+    // Handle double backslashes (\\# becomes #)
+    .replace(/\\\\/g, '___DOUBLEBS___')
+    .replace(/\\#/g, '#')
+    .replace(/\\\*/g, '*')
+    .replace(/\\-/g, '-')
+    // Restore legitimate double backslashes if needed
+    .replace(/___DOUBLEBS___/g, '\\');
+
+  let html = markdown
+    .replace(/^### (.*?)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.*?)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.*?)$/gm, '<h1>$1</h1>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/^- (.*?)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*?<\/li>)/s, '<ul>$1</ul>')
+    .replace(/<\/ul>\s*<ul>/g, '')
+    .replace(/\n\n/g, '</p><p>');
+
+  html = '<p>' + html + '</p>';
+  return html;
+}
+
+
+
+
+    document.addEventListener('DOMContentLoaded', () => detailApp.init());
+  </script>
+</body>
+</html>

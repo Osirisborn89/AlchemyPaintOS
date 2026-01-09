@@ -1,0 +1,298 @@
+[
+  {
+    "faction": "Adepta Sororitas",
+    "lore": "Sisters of Battle - Faith militant acts of faith divine intervention",
+    "themes": "faith,fire,purity,repentia",
+    "units": "Battle Sisters,Repentia,Celestine,Exorcist",
+    "urls": "lexicanum.com",
+    "scheme": "black/red"
+  },
+  {
+    "faction": "Adeptus Custodes",
+    "lore": "Golden guardians - Auramite precognition shield hosts",
+    "themes": "gold,auramite,precognition",
+    "units": "Guardian Spear,Allarus,Vertus Praetors",
+    "urls": "lexicanum.com",
+    "scheme": "auramite/gold"
+  },
+  {
+    "faction": "Adeptus Mechanicus",
+    "lore": "Priesthood of Mars - Omnissiah machine spirits forge worlds",
+    "themes": "omnissiah,machine-spirit,servitors,forgeworld",
+    "units": "Skitarii,Kastelan Robots,Tech-Priest,Onager",
+    "urls": "lexicanum.com",
+    "scheme": "red/rust"
+  },
+  {
+    "faction": "Astra Militarum",
+    "lore": "Imperial Guard - Hammer of the Emperor endless conscripts",
+    "themes": "guardsmen,tanks,conscripts,cadian",
+    "units": "Leman Russ,Cadian,Death Korps,Sentinel",
+    "urls": "lexicanum.com",
+    "scheme": "khaki/camo"
+  },
+  {
+    "faction": "Blood Angels",
+    "lore": "Sanguinius sons - Black Rage Red Thirst noble",
+    "themes": "rage,blood,noble,death-company",
+    "units": "Death Company,Sanguinary Guard,Sang Priests",
+    "urls": "lexicanum.com",
+    "scheme": "red/black"
+  },
+  {
+    "faction": "Dark Angels",
+    "lore": "First Legion - Fallen secrets deathwing inner circle",
+    "themes": "secrets,fallen,inner-circle,deathwing",
+    "units": "Deathwing Knights,Ravenwing,Dark Talons",
+    "urls": "lexicanum.com",
+    "scheme": "hunter-green"
+  },
+  {
+    "faction": "Death Guard",
+    "lore": "Nurgle plague lords resilient toughness",
+    "themes": "plague,nurgle,resilient,putrid",
+    "units": "Plague Marines,Poxwalkers,Morty,Typhus",
+    "urls": "lexicanum.com",
+    "scheme": "green/rust"
+  },
+  {
+    "faction": "Grey Knights",
+    "lore": "Daemonhunters psychic purge nemesis",
+    "themes": "daemons,psychic,nemesis,brotherhood",
+    "units": "Grey Knights Terminator,Paladins,Purifiers",
+    "urls": "lexicanum.com",
+    "scheme": "silver/blue"
+  },
+  {
+    "faction": "Imperial Knights",
+    "lore": "God machines noble houses titanic",
+    "themes": "knights,titanic,houses,glory",
+    "units": "Knight Paladin,Armiger,Questor",
+    "urls": "lexicanum.com",
+    "scheme": "house-colours"
+  },
+  {
+    "faction": "Necrons",
+    "lore": "Undying lords gauss phase shift dynasties",
+    "themes": "immortal,gauss,dynasties,necrodermis",
+    "units": "Necron Warriors,Immortals,Overlord,Pretorian",
+    "urls": "lexicanum.com",
+    "scheme": "green/metal"
+  },
+  {
+    "faction": "Orks",
+    "lore": "WAAAGH fungal horde dakka choppa boyz",
+    "themes": "waaagh,boyz,stompa,choppa,blood-axe",
+    "units": "Nobz,Boyz,Gorkanaut,Ghazkull",
+    "urls": "lexicanum.com",
+    "scheme": "git/green"
+  },
+  {
+    "faction": "Space Wolves",
+    "lore": "Fenrisian saga thunderwolf rune priests",
+    "themes": "saga,wolves,fenris,rune-priest",
+    "units": "Wolf Guard,Long Fangs,Thunderwolf,Bjorn",
+    "urls": "lexicanum.com",
+    "scheme": "grey/fur"
+  },
+  {
+    "faction": "Thousand Sons",
+    "lore": "Tzeentch sorcery all is dust rubric",
+    "themes": "sorcery,rubric,dust,tzeentch,changeling",
+    "units": "Rubric Marines,Sorcerer,Ahrimans,Magnus",
+    "urls": "lexicanum.com",
+    "scheme": "blue/gold"
+  },
+  {
+    "faction": "Tyranids",
+    "lore": "Great Devourer hive mind biomass synapse",
+    "themes": "biomass,synapse,hive,tyrant,synapse-creature",
+    "units": "Hive Tyrant,Genestealer,Carnifex,Lictor",
+    "urls": "lexicanum.com",
+    "scheme": "purple/chitin"
+  },
+  {
+    "faction": "Ultramarines",
+    "lore": "Codex Astartes Guilliman sons discipline",
+    "themes": "codex,discipline,guilliman,smurfs",
+    "units": "Primaris Intercessor,Tigurius,Marneus,Captain",
+    "urls": "lexicanum.com",
+    "scheme": "blue/gold"
+  },
+  {
+    "faction": "World Eaters",
+    "lore": "Blood for the Blood God berserkers khorne",
+    "themes": "khorne,blood,berserker,rage,angron",
+    "units": "Kharn,Angron,Berserkers,Eater-Champion",
+    "urls": "lexicanum.com",
+    "scheme": "red/brass"
+  },
+  {
+    "faction": "Aeldari",
+    "lore": "Craftworld Asuryani paths Khaine aspect warriors",
+    "themes": "paths,aspect,farseer,craftworld",
+    "units": "Dire Avengers,Wraithlord,Guardian,Shining Spear",
+    "urls": "lexicanum.com",
+    "scheme": "craftworld-specific"
+  },
+  {
+    "faction": "Drukhari",
+    "lore": "Commorragh dark eldar pain kabal wyches",
+    "themes": "pain,kabal,wyches,dark-eldar",
+    "units": "Archon,Wyches,Ravager,Scourges",
+    "urls": "lexicanum.com",
+    "scheme": "black/purple"
+  },
+  {
+    "faction": "Leagues of Votann",
+    "lore": "Kin void dwarves ancestral cores hearthkyn",
+    "themes": "kin,hearthkyn,einhyr,votann,void-dwarf",
+    "units": "Hearthkyn,Einhyr Hekaton,Veinwrought,Cthonian",
+    "urls": "lexicanum.com",
+    "scheme": "stone/orange"
+  },
+  {
+    "faction": "T'au Empire",
+    "lore": "Greater Good fire caste battlesuits sept",
+    "themes": "greater-good,battlesuit,sept,drone",
+    "units": "Crisis Suit,Riptide,Tau Commander,Stealth Suit",
+    "urls": "lexicanum.com",
+    "scheme": "sept-colours"
+  },
+  {
+    "faction": "Chaos Daemons",
+    "lore": "Neverborn warp entities daemon prince",
+    "themes": "warp,daemon-prince,neverborn,khorne,nurgle",
+    "units": "Bloodthirster,Great Unclean One,Keeper,Pink Horror",
+    "urls": "lexicanum.com",
+    "scheme": "chaos-god"
+  },
+  {
+    "faction": "Chaos Knights",
+    "lore": "Fallen houses warp titans desecrator",
+    "themes": "fallen,despoiler,warp-titan,chaos-knight",
+    "units": "Knight Desecrator,Rampager,Castellan",
+    "urls": "lexicanum.com",
+    "scheme": "spiked/rust"
+  },
+  {
+    "faction": "Chaos Space Marines",
+    "lore": "Traitor legions Abaddon black legion",
+    "themes": "chaos,black-legion,traitor,abaddon,chosen",
+    "units": "Chaos Lord,Chosen,Terminator,Cultist",
+    "urls": "lexicanum.com",
+    "scheme": "black/red"
+  },
+  {
+    "faction": "Black Templars",
+    "lore": "Zealot crusaders no psykers emperor faith",
+    "themes": "crusade,zealot,no-psykers,emperor",
+    "units": "Emperors Champion,Sword Brethren,Crusader",
+    "urls": "lexicanum.com",
+    "scheme": "black/white"
+  },
+  {
+    "faction": "Iron Hands",
+    "lore": "Flesh is weak cybernetic ferrus",
+    "themes": "iron,flesh-weak,cybernetic,ferrus",
+    "units": "Iron Father,Dreadnought,Techvorn,Gravis",
+    "urls": "lexicanum.com",
+    "scheme": "black/silver"
+  },
+  {
+    "faction": "Raven Guard",
+    "lore": "Shadow stalkers stealth corax",
+    "themes": "shadow,stealth,corax,infiltration",
+    "units": "Shadow Captain,Eliminators,Vanguard Vets",
+    "urls": "lexicanum.com",
+    "scheme": "black/white"
+  },
+  {
+    "faction": "Salamanders",
+    "lore": "Promethean cult fire vulkan",
+    "themes": "promethean,fire,vulkan,eternal-flame",
+    "units": "Firedrake,Aggressor,Invader,Flamer",
+    "urls": "lexicanum.com",
+    "scheme": "green/black"
+  },
+  {
+    "faction": "White Scars",
+    "lore": "Lightning hunters speed khan",
+    "themes": "lightning,bike,khan,speed,assault",
+    "units": "Outriders,Huntmaster,Bike,Stormspeaker",
+    "urls": "lexicanum.com",
+    "scheme": "white/red"
+  },
+  {
+    "faction": "Emperors Children",
+    "lore": "Slaanesh excess perfect noise",
+    "themes": "slaanesh,noise,perfect,excess,perfection",
+    "units": "Noise Marine,Sonic Blaster,Fulgrim,Lucius",
+    "urls": "lexicanum.com",
+    "scheme": "purple/gold"
+  },
+  {
+    "faction": "Night Lords",
+    "lore": "Fear masters terror curze",
+    "themes": "terror,raptor,curze,fear-tactics,terror-assault",
+    "units": "Raptor Champion,Night Lord,Huntmaster,Curze",
+    "urls": "lexicanum.com",
+    "scheme": "midnight-blue"
+  },
+  {
+    "faction": "Word Bearers",
+    "lore": "Voice of Chaos sermons dark apostle",
+    "themes": "dark-apostle,sermon,chaos,lorgar,word",
+    "units": "Dark Apostle,Possessed,Cultist,Lorgar",
+    "urls": "lexicanum.com",
+    "scheme": "crimson/black"
+  },
+  {
+    "faction": "Iron Warriors",
+    "lore": "Siege masters daemon engines perturabo",
+    "themes": "siege,havoc,daemon-engine,perturabo,iron",
+    "units": "Havoc,Obliterator,Warpsmith,Perturabo",
+    "urls": "lexicanum.com",
+    "scheme": "iron/hazard"
+  },
+  {
+    "faction": "Alpha Legion",
+    "lore": "Hydra dominatus infiltration alpharius",
+    "themes": "infiltration,spies,hydra,alpharius,deception",
+    "units": "Headhunter,Cultist,Terminator,Alpharius",
+    "urls": "lexicanum.com",
+    "scheme": "teal/green"
+  },
+  {
+    "faction": "Deathwatch",
+    "lore": "Xenos hunters kill teams watch fortress",
+    "themes": "xenos,kill-team,watch,watch-fortress",
+    "units": "Deathwatch Terminator,Librarian,Watch Sergeant",
+    "urls": "lexicanum.com",
+    "scheme": "black/silver"
+  },
+  {
+    "faction": "Imperial Fists",
+    "lore": "Defenders of Terra siege dorn",
+    "themes": "siege,defense,dorn,fortified,siege-tactics",
+    "units": "Primaris Captain,Stalwart,Templar,Dorn",
+    "urls": "lexicanum.com",
+    "scheme": "yellow/black"
+  },
+  {
+    "faction": "Genestealer Cults",
+    "lore": "Four Armed Emperor Patriarch hybrid",
+    "themes": "patriarch,hybrid,generation,cult-uprising",
+    "units": "Acolyte,Metamorph,Patriarch,Hybrid Cultist",
+    "urls": "lexicanum.com",
+    "scheme": "purple/flesh"
+  },
+  {
+    "faction": "Tau Fire Caste",
+    "lore": "Greater Good dakka pulse rifles sept",
+    "themes": "greater-good,dakka,pulse-rifle,sept",
+    "units": "Fire Warrior,Strike Team,Cadre,Commander",
+    "urls": "lexicanum.com",
+    "scheme": "sept-colour"
+  }
+]
