@@ -1,84 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Warhammer 40K Factions - Lore</title>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Arial, sans-serif; background: #0a0a0a; color: #fff; padding: 40px; position: relative; }
-h1 { color: #ffd700; margin-bottom: 30px; text-align: center; font-size: 36px; }
-.nav-btn { position: absolute; top: 20px; right: 40px; background: #22c55e; color: #000; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; }
-.nav-btn:hover { background: #16a34a; }
-#grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-.tile { background: #1a1a1a; border: 2px solid #ffd700; border-radius: 8px; padding: 40px; cursor: pointer; text-align: center; transition: all 0.3s; min-height: 120px; display: flex; align-items: center; justify-content: center; }
-.tile:hover { box-shadow: 0 12px 32px rgba(255,215,0,0.5); transform: scale(1.08); }
-.tile h3 { color: #ffd700; font-size: 18px; margin: 0; }
-#modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; overflow: auto; padding: 20px; }
-#modal.active { display: flex; }
-.modal-content { background: #1a1a1a; border: 2px solid #ffd700; border-radius: 12px; padding: 40px; max-width: 750px; width: 100%; max-height: 85vh; overflow-y: auto; }
-.close { color: #ffd700; font-size: 36px; cursor: pointer; float: right; margin-top: -15px; line-height: 1; }
-.close:hover { color: #fff; }
-#modal-body h1 { color: #ffd700; margin: 20px 0 15px 0; font-size: 28px; border-bottom: 2px solid #ffd700; padding-bottom: 10px; }
-#modal-body h2 { color: #ffd700; margin: 20px 0 10px 0; font-size: 22px; }
-#modal-body h3 { color: #ffed4e; margin: 15px 0 8px 0; font-size: 18px; }
-#modal-body p { margin: 12px 0; line-height: 1.8; color: #ddd; }
-#modal-body ul, #modal-body ol { margin: 12px 0 12px 20px; color: #ddd; }
-#modal-body li { margin: 6px 0; }
-#modal-body code { background: #0a0a0a; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
-#modal-body pre { background: #0a0a0a; padding: 12px; border-left: 3px solid #ffd700; overflow-x: auto; margin: 12px 0; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warhammer 40K Factions - Lore</title>
+  <link rel="stylesheet" href="styles/design-system.css">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+  <style>
+    /* Lore-specific styles */
+    .lore-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--space-lg);
+      padding: var(--space-xl) 0;
+    }
+
+    .faction-tile {
+      background-color: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 0.5rem;
+      padding: var(--space-lg);
+      cursor: pointer;
+      text-align: center;
+      transition: all var(--transition-normal);
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .faction-tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-accent-teal), var(--color-accent-green));
+      transition: height var(--transition-normal);
+    }
+
+    .faction-tile:hover {
+      border-color: var(--color-accent-teal);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+    }
+
+    .faction-tile:hover::before {
+      height: 6px;
+    }
+
+    .faction-tile h3 {
+      color: var(--color-text-heading);
+      font-size: var(--font-size-lg);
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Lore modal content styling */
+    #modal-body h1 {
+      color: var(--color-accent-teal);
+      margin: var(--space-lg) 0 var(--space-md) 0;
+      font-size: var(--font-size-xl);
+      border-bottom: 2px solid var(--color-accent-green);
+      padding-bottom: var(--space-md);
+    }
+
+    #modal-body h1:first-child {
+      margin-top: 0;
+    }
+
+    #modal-body h2 {
+      color: var(--color-accent-green);
+      margin: var(--space-lg) 0 var(--space-sm) 0;
+      font-size: var(--font-size-lg);
+    }
+
+    #modal-body h3 {
+      color: var(--color-accent-teal);
+      margin: var(--space-md) 0 var(--space-sm) 0;
+      font-size: var(--font-size-md);
+    }
+
+    #modal-body p {
+      margin: var(--space-sm) 0;
+      line-height: 1.8;
+      color: var(--color-text-primary);
+    }
+
+    #modal-body ul,
+    #modal-body ol {
+      margin: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+      color: var(--color-text-primary);
+    }
+
+    #modal-body li {
+      margin: var(--space-2xs) 0;
+    }
+
+    #modal-body code {
+      background-color: var(--color-bg-tertiary);
+      color: var(--color-accent-teal);
+      padding: var(--space-2xs) var(--space-xs);
+      border-radius: 0.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: var(--font-size-sm);
+    }
+
+    #modal-body pre {
+      background-color: var(--color-bg-tertiary);
+      border-left: 3px solid var(--color-accent-green);
+      padding: var(--space-md);
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin: var(--space-md) 0;
+      color: var(--color-accent-teal);
+    }
+
+    #modal-body blockquote {
+      border-left: 3px solid var(--color-accent-teal);
+      padding-left: var(--space-md);
+      margin: var(--space-md) 0;
+      color: var(--color-text-secondary);
+      font-style: italic;
+    }
+
+    #modal-body a {
+      color: var(--color-accent-teal);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    #modal-body a:hover {
+      color: var(--color-accent-teal-hover);
+      text-decoration: underline;
+    }
+
+    #modal-body strong {
+      color: var(--color-accent-green);
+      font-weight: 600;
+    }
+
+    #modal-body em {
+      color: var(--color-accent-teal);
+    }
+  </style>
 </head>
 <body>
-<a href="index.html" class="nav-btn">HOME</a>
-<h1>Warhammer 40K Factions Lore</h1>
-<div id="grid"></div>
-<div id="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal()">&times;</span>
-<div id="modal-body"></div>
-</div>
-</div>
+  <header>
+    <div class="header-content">
+      <h1 class="header-title">Warhammer 40K Factions</h1>
+      <a href="index.html" class="nav-btn">Home</a>
+    </div>
+  </header>
 
-<script>
-function closeModal() {
-  document.getElementById('modal').classList.remove('active');
-}
+  <main>
+    <div id="grid" class="lore-grid"></div>
+  </main>
 
-document.getElementById('modal').addEventListener('click', (e) => {
-  if (e.target.id === 'modal') closeModal();
-});
+  <!-- Lore Modal -->
+  <div id="modal" class="modal">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;" id="modal-overlay"></div>
+    <div class="modal-content">
+      <button id="modal-close" class="modal-close">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
 
-fetch('./Data/factions_lore.csv')
-  .then(r => r.text())
-  .then(csv => {
-    Papa.parse(csv, {
-      header: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        console.log('Loaded ' + results.data.length + ' factions');
-        const grid = document.getElementById('grid');
-        
-        results.data.forEach(row => {
-          if (row.faction && row.faction.trim()) {
-            const tile = document.createElement('div');
-            tile.className = 'tile';
-            tile.innerHTML = '<h3>' + row.faction.trim() + '</h3>';
-            tile.onclick = () => {
-              const htmlContent = marked.parse(row.lore_md || 'No lore available');
-              document.getElementById('modal-body').innerHTML = htmlContent;
-              document.getElementById('modal').classList.add('active');
-            };
-            grid.appendChild(tile);
-          }
-        });
-      },
-      error: (err) => console.error('Papa Parse error:', err)
+  <script>
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    document.getElementById('modal-overlay').addEventListener('click', closeModal);
+
+    // Keyboard close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
     });
-  })
-  .catch(e => console.error('Fetch error:', e));
-</script>
+
+    // Load faction data
+    const timestamp = Date.now();
+    fetch(`./data/factions_lore.csv?v=${timestamp}`)
+      .then(r => r.text())
+      .then(csv => {
+        Papa.parse(csv, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            console.log('Loaded ' + results.data.length + ' factions');
+            const grid = document.getElementById('grid');
+            
+            results.data.forEach(row => {
+              if (row.faction && row.faction.trim()) {
+                const tile = document.createElement('div');
+                tile.className = 'faction-tile';
+                tile.innerHTML = '<h3>' + row.faction.trim() + '</h3>';
+                tile.addEventListener('click', () => {
+                  const htmlContent = marked.parse(row.lore_md || 'No lore available');
+                  document.getElementById('modal-body').innerHTML = htmlContent;
+                  document.getElementById('modal').classList.add('active');
+                });
+                grid.appendChild(tile);
+              }
+            });
+          },
+          error: (err) => console.error('Papa Parse error:', err)
+        });
+      })
+      .catch(e => console.error('Fetch error:', e));
+  </script>
 </body>
 </html>
