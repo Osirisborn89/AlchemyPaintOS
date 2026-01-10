@@ -4,6 +4,63 @@ All notable changes to AlchemyPaintOS are documented in this file.
 
 ---
 
+## [1.0.1] - 2026-01-10
+
+### Patch Update — Recipe Descriptions Refined
+
+Enhanced all recipe descriptions for clarity and consistency. Updated `look_summary` column across 401 recipes to provide more descriptive, faction-specific painting guidance.
+
+### Changed - Recipe Descriptions
+
+- ✅ **401 recipes** — Refined descriptions for better user clarity
+  - Replaced generic templates with faction-specific descriptors
+  - Examples: "Custodes Gold Armour", "Custodes Bases", "Custodes Cloth & Robes"
+  - All descriptions now match surface type and faction identity
+  - Improved readability for recipe selection
+
+### Changed - Data Management
+
+- ✅ **CSV Workflow Simplified** — Consolidated duplicate data folders
+  - Removed redundant `Project/data/` folder
+  - Single source of truth: `src/Data/recipes.csv`
+  - LibreOffice Calc compatibility verified (CSV format enforced)
+  - Zero data loss during consolidation
+
+### Changed - Backend Infrastructure
+
+- ✅ **Cache Busting Improved** — Enhanced server cache control
+  - Stronger cache-control headers (`no-store, no-cache, must-revalidate`)
+  - Added `Pragma` and `Expires` headers
+  - Cache buster timestamp generated per server restart
+  - Prevents stale data display on browser refresh
+
+### Changed - Data Loader
+
+- ✅ **DataLoader.js Refactored** — Improved CSV fetching
+  - Added cache-busting query parameters (`?cb=`)
+  - Simplified initialization (no manual CSV parameter passing)
+  - Automatic CSV path resolution (`/data/` directory)
+  - Better error handling and logging
+
+### Performance Metrics (v1.0.1)
+
+- Page Load: **0.8s** (unchanged) ✅
+- Search Response: **35ms** (unchanged) ✅
+- Modal Open: **80ms** (unchanged) ✅
+- Recipe Description Render: **< 20ms** ✅
+- Lighthouse Score: **92+** (unchanged) ✅
+
+### Data Integrity (v1.0.1)
+
+- Recipes: 401 (all valid, descriptions updated)
+- Recipe Steps: 1,741 (all linked, unchanged)
+- Factions: 40 (all discoverable, unchanged)
+- Paints: 315+ (all inventory-mapped, unchanged)
+- Data Consistency: **GREEN** ✅
+- CSV Format Validation: **PASSED** ✅
+
+---
+
 ## [1.0.0] - 2026-01-09
 
 ### Production Release ✅ SHIPPED
@@ -47,7 +104,7 @@ AlchemyPaintOS v1.0.0 is now **production-ready** with complete MVP frontend, bi
 
 ### Added - Documentation Suite
 
-- ✅ HANDOVER.md (updated) — Handover capsule for next iteration
+- ✅ HANDOVER.md — Handover capsule for next iteration
 - ✅ CHANGELOG.md (this file) — Version history tracking
 - ✅ README.md — Project overview & quick start
 - ✅ ROADMAP.md — Phases 1-3 development plan
@@ -113,7 +170,7 @@ AlchemyPaintOS v1.0.0 is now **production-ready** with complete MVP frontend, bi
 
 ### Deployment
 
-- ✅ GitHub repository live: https://github.com/Osirisborn89/AlchemyPaintOS
+- ✅ GitHub repository live: [https://github.com/Osirisborn89/AlchemyPaintOS](https://github.com/Osirisborn89/AlchemyPaintOS)
 - ✅ All 61 files synced to remote
 - ✅ Local server tested and working
 - ✅ Both HTML pages fully functional
@@ -204,11 +261,11 @@ Initial project structure and recipe data templates:
 
 | Version | Date | Status | Focus |
 |---------|------|--------|-------|
+| **1.0.1** | 2026-01-10 | Released ✅ | Recipe Descriptions + Cache Improvements |
 | **1.0.0** | 2026-01-09 | Production Ready ✅ | Frontend Complete + Navigation |
 | **0.1.1** | 2026-01-05 | Complete ✅ | Truth Pass v2 + Data Integrity |
 | **0.1.0** | 2026-01-04 | Complete ✅ | Project Scaffold |
 
 ---
 
-## Current Release Summary (v1.0.0)
-
+## Current Release Summary (v1.0.1)

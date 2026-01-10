@@ -72,15 +72,7 @@
         console.log('🎨 Initializing AlchemyPaintOS...');
         this.dataLoader = new DataLoader();
         try {
-          const timestamp = Date.now();
-          const [recipes, steps, inventory, factions] = await Promise.all([
-            fetch(`./data/recipes.csv?v=${timestamp}`).then(r => r.text()),
-            fetch(`./data/recipe_steps.csv?v=${timestamp}`).then(r => r.text()),
-            fetch(`./data/inventory_export.csv?v=${timestamp}`).then(r => r.text()),
-            fetch(`./data/factions_lore.csv?v=${timestamp}`).then(r => r.text())
-          ]);
-
-          const loaded = await this.dataLoader.loadAllData(recipes, steps, inventory, factions);
+          const loaded = await this.dataLoader.loadAllData();
           if (!loaded) throw new Error('Data loader failed');
           
           this.setup();
@@ -168,14 +160,20 @@
           const card = document.createElement('div');
           card.className = 'card';
           card.style.cursor = 'pointer';
+          
+          // Build tags array
+          const tags = [this.sanitize(recipe.surface), this.sanitize(recipe.difficulty)];
+          if (recipe.finish) tags.push(this.sanitize(recipe.finish));
+          const tagsHTML = tags.map(tag => `<span class="card-tag">${tag}</span>`).join('');
+          
           card.innerHTML = `
+            <div class="card-header">
+             <span class="card-faction-badge">${this.sanitize(recipe.faction)}</span>
+            </div>
             <h3 class="card-title">${this.sanitize(recipe.name)}</h3>
-            <p class="card-subtitle">${this.sanitize(recipe.faction)}</p>
-            <p class="card-description">${this.sanitize(recipe.description.substring(0, 100))}...</p>
-            <div class="card-meta">
-              <span class="card-tag">${this.sanitize(recipe.surface)}</span>
-              <span class="card-tag">${this.sanitize(recipe.difficulty)}</span>
-              ${recipe.finish ? `<span class="card-tag">${this.sanitize(recipe.finish)}</span>` : ''}
+            <p class="card-surface">${this.sanitize(recipe.surface)}</p>
+            <div class="card-tags">
+              ${tagsHTML}
             </div>
           `;
           card.addEventListener('click', () => this.showDetail(recipe));

@@ -1,13 +1,16 @@
-﻿# AlchemyPaintOS Development Roadmap
+﻿Here's the updated ROADMAP.md with v1.0.1 and current status:
+
+text
+# AlchemyPaintOS Development Roadmap
 
 ## Project Vision
 
 Create the definitive Warhammer 40K painting reference system - a comprehensive, open-source tool combining detailed painting recipes with inventory management and faction knowledge.
 
-## Current Status: v1.0.0 ✅ PRODUCTION READY
+## Current Status: v1.0.1 ✅ PRODUCTION READY
 
-**Last Updated:** January 9, 2026, 15:00 GMT  
-**Status:** Complete MVP with frontend, bidirectional navigation, and comprehensive documentation  
+**Last Updated:** January 10, 2026, 16:33 GMT  
+**Status:** Production MVP with enhanced recipe descriptions, optimized caching, and comprehensive documentation  
 **Deployment:** Live on GitHub ✅
 
 ---
@@ -15,9 +18,10 @@ Create the definitive Warhammer 40K painting reference system - a comprehensive,
 ## Release Timeline
 
 Phase 1.0 (✅ COMPLETED) [MVP - Jan 8-9]
-├── v1.0.0 - Production Release ← YOU ARE HERE
+├── v1.0.0 - Production Release (Jan 9)
+└── v1.0.1 - Recipe Polish + Cache (Jan 10) ← YOU ARE HERE
 
-Phase 1.2 (🔄 PLANNED) [Core Enhancements - Jan 9-22]
+Phase 1.2 (🔄 PLANNED) [Core Enhancements - Jan 12-22]
 ├── v1.1.0 - Advanced Filtering (Jan 12)
 ├── v1.2.0 - Inventory Calculator (Jan 16)
 ├── v1.3.0 - Export & Print (Jan 19)
@@ -28,10 +32,8 @@ Phase 2 (📋 PLANNED) [Backend & API - Feb-Mar 2026]
 └── v2.1.0 - Database Migration (Mar 31)
 
 Phase 3 (📋 PLANNED) [Mobile & Expansion - Apr-Jun 2026]
-├── v3.0.0 - React Native Mobile App (May 1)
-└── v3.1.0 - Cloud Sync & Features (Jun 30)
-
-text
+├── v3.0.0 - React Native Mobile App (May 15)
+└── v3.1.0 - Cloud Sync & Community (Jun 30)
 
 ---
 
@@ -66,9 +68,9 @@ text
 - ✅ All audit gates GREEN
 
 **Documentation Created:**
-- ✅ HANDOVER.md (updated) — Handover capsule
-- ✅ CHANGELOG.md (updated) — Version history
-- ✅ MILESTONES.md (updated) — Milestone tracking
+- ✅ HANDOVER.md — Handover capsule
+- ✅ CHANGELOG.md — Version history
+- ✅ MILESTONES.md — Milestone tracking
 - ✅ README.md — Project overview
 - ✅ STATUS.md — Health dashboard
 - ✅ CONTRIBUTING.md — Contribution guidelines
@@ -87,9 +89,53 @@ text
 
 ---
 
-## Phase 1.2: Core Enhancements (🔄 PLANNED - Jan 9-22)
+## Phase 1.1: Recipe Polish (✅ COMPLETED - January 10, 2026)
 
-### v1.1.0: Advanced Filtering (Jan 9-12)
+### Status: SHIPPED & INTEGRATED
+
+**Recipe Refinement:**
+- ✅ 401 recipe descriptions audited & refined
+- ✅ Faction-specific descriptors applied
+- ✅ Generic templates replaced with clarity-focused summaries
+- ✅ Look_summary column fully updated across all recipes
+- ✅ Data consistency verified & tested
+
+**Examples of Improvements:**
+- "Box-Art Style Armour..." → "Custodes Gold Armour"
+- "Official/box-art aligned..." → "Custodes Bases"
+- Faction-specific painting guidance in all descriptions
+
+**Data Management:**
+- ✅ Duplicate `Project/data/` folder consolidated
+- ✅ Single source of truth: `src/Data/recipes.csv`
+- ✅ Zero data loss during consolidation
+- ✅ Canonical path verified across codebase
+
+**Performance & Caching:**
+- ✅ Cache-control headers enhanced (no-store, no-cache, must-revalidate)
+- ✅ Pragma and Expires headers added for broader browser support
+- ✅ Cache-busting query parameters implemented (`?cb=`)
+- ✅ Server restart cache buster generates fresh timestamps
+- ✅ DataLoader refactored for automatic CSV path resolution
+- ✅ Improved error handling and console logging
+
+**Browser Verification:**
+- ✅ Hard refresh (Ctrl+Shift+R) displays updated content
+- ✅ All 401 recipe titles reflect new descriptions
+- ✅ No stale data from previous sessions
+- ✅ LibreOffice Calc CSV export compatibility verified
+
+**Deployment:**
+- ✅ Changes committed to local repo
+- ✅ Ready for GitHub sync
+- ✅ All tests passing
+- ✅ Documentation updated (CHANGELOG, MILESTONES)
+
+---
+
+## Phase 1.2: Core Enhancements (🔄 PLANNED - Jan 12-22)
+
+### v1.1.0: Advanced Filtering (Jan 12)
 
 **Goals:**
 - Multi-dimensional filtering system
@@ -120,7 +166,7 @@ text
 
 ---
 
-### v1.2.0: Inventory Calculator (Jan 13-16)
+### v1.2.0: Inventory Calculator (Jan 16)
 
 **Goals:**
 - Shopping list generation
@@ -154,7 +200,7 @@ text
 
 ---
 
-### v1.3.0: Export & Print (Jan 17-19)
+### v1.3.0: Export & Print (Jan 19)
 
 **Goals:**
 - Recipe sharing
@@ -186,7 +232,7 @@ text
 
 ---
 
-### v1.4.0: User Preferences (Jan 20-21)
+### v1.4.0: User Preferences (Jan 22)
 
 **Goals:**
 - Personalization
@@ -215,7 +261,7 @@ text
 - [ ] Import/export backup
 
 **Effort:** 5 hours | **Priority:** LOW  
-**Target Date:** January 21, 2026
+**Target Date:** January 22, 2026
 
 ---
 
@@ -258,6 +304,7 @@ text
 - Logging & monitoring
 
 **Endpoints:**
+
 GET /api/recipes # List all recipes
 GET /api/recipes/:id # Get recipe detail
 GET /api/factions # List all factions
@@ -301,6 +348,7 @@ text
 - Data integrity
 
 **Schema:**
+
 ```sql
 recipes
 ├── id (PK)
@@ -513,21 +561,32 @@ Success Criteria:
 
 Success Metrics by Phase
 Phase 1.0 (✅ ACHIEVED)
- 401 recipes loaded
+✅ 401 recipes loaded
 
- 40 factions indexed
+✅ 40 factions indexed
 
- Search < 50ms
+✅ Search < 50ms
 
- Mobile responsive
+✅ Mobile responsive
 
- Production ready
+✅ Production ready
 
- Documentation complete
+✅ Documentation complete
 
- GitHub live
+✅ GitHub live
 
- Navigation working
+✅ Navigation working
+
+Phase 1.1 (✅ ACHIEVED)
+✅ 401 recipe descriptions refined
+
+✅ Data consolidation completed
+
+✅ Cache optimization implemented
+
+✅ CSV format validated
+
+✅ LibreOffice compatibility verified
 
 Phase 1.2 (TARGETS)
  4 new versions released
@@ -572,11 +631,13 @@ Development Priorities
 Q1 2026 (Jan-Mar)
 ✅ Phase 1.0 - MVP (COMPLETE)
 
+✅ Phase 1.1 - Recipe Polish (COMPLETE)
+
 🔄 Phase 1.2 - Enhancements (IN PROGRESS)
 
-📋 Phase 2.0 - Backend Architecture
+📋 Phase 2.0 - Backend Architecture (PLANNED)
 
-Focus: Polish MVP, add core features
+Focus: Polish MVP, add core features, build backend foundation
 
 Q2 2026 (Apr-Jun)
 Phase 2.0 - Backend API Development
@@ -585,7 +646,7 @@ Phase 3.0 - Mobile App Development
 
 Community building
 
-Focus: Scale infrastructure, expand platform
+Focus: Scale infrastructure, expand platform, launch mobile
 
 Q3+ 2026
 Phase 3.0 - Mobile Completion
@@ -693,18 +754,24 @@ Future: Discord server, community wiki
 
 Maintenance & Support
 Bug Reports: GitHub Issues
+
 Feature Requests: GitHub Discussions
+
 Documentation: See /docs folder
+
 Contact: via GitHub
 
 License & Attribution
 License: MIT (or selected open source)
+
 Warhammer 40K: GW property, used for reference only
+
 Paints: Brand names used for reference only
 
 Version History
 Version	Date	Phase	Status
 1.0.0	Jan 9, 2026	1.0 MVP	✅ LIVE
+1.0.1	Jan 10, 2026	1.1 Polish	✅ LIVE
 1.1.0	Jan 12, 2026	1.2	🔄 Planned
 1.2.0	Jan 16, 2026	1.2	🔄 Planned
 1.3.0	Jan 19, 2026	1.2	🔄 Planned
@@ -713,30 +780,33 @@ Version	Date	Phase	Status
 2.1.0	Mar 31, 2026	2.0	📋 Planned
 3.0.0	May 15, 2026	3.0	📋 Planned
 3.1.0	Jun 30, 2026	3.0	📋 Planned
-Feedback & Questions
-Have ideas? Found an issue? Want to contribute?
-
-Check existing issues — might already be tracked
-
-Open a discussion — for ideas and questions
-
-Submit a PR — for code contributions
-
-Report a bug — with clear reproduction steps
-
-All contributions welcome! 🚀
-
+Status Dashboard
 text
 ╔════════════════════════════════════════════════════╗
 ║       AlchemyPaintOS Development Roadmap           ║
-║       Current: v1.0.0 (Phase 1.0 Complete) ✅      ║
+║       Current: v1.0.1 (Phase 1.1 Complete) ✅      ║
 ║       Next: v1.1.0 (Phase 1.2 In Progress) 🔄      ║
 ║                                                    ║
 ║  Timeline: Q1-Q3 2026                             ║
 ║  Vision: Definitive Warhammer 40K Paint Reference ║
 ║  Status: On Track ✅                               ║
+║                                                    ║
+║  Completed:                                        ║
+║  ✅ MVP Frontend (Phase 1.0)                      ║
+║  ✅ Recipe Polish (Phase 1.1)                     ║
+║                                                    ║
+║  In Progress:                                      ║
+║  🔄 Core Enhancements (Phase 1.2)                 ║
+║                                                    ║
+║  Upcoming:                                         ║
+║  📋 Backend API (Phase 2.0, Feb 2026)             ║
+║  📋 Mobile App (Phase 3.0, Apr 2026)              ║
 ╚════════════════════════════════════════════════════╝
-Last Updated: January 9, 2026, 15:00 GMT
+Last Updated: January 10, 2026, 16:33 GMT
 Next Review: January 22, 2026
 Maintained by: Osirisborn89
 Repository: https://github.com/Osirisborn89/AlchemyPaintOS
+
+For the Emperor! ⚔️🌟
+
+text

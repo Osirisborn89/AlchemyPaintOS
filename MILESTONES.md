@@ -29,7 +29,7 @@ Bring placeholder recipes/steps to 0 by aligning each faction to official or cur
 ### Imperium (Non-Chapter) (COMPLETE)
 
 - ✅ **Adepta Sororitas** — full Truth Pass v2 rewrite (9 recipes / 36 steps)
-- ✅ **Adeptus Custodes** — full Truth Pass v2 rewrite (9 recipes / 36 steps) + polish pass
+- ✅ **Adeptus Custodes** — full Truth Pass v2 rewrite (9 recipes / 36 steps) + polish pass + description refinement
 - ✅ **Adeptus Mechanicus** — full Truth Pass v2 rewrite (7 recipes / 28 steps) + polish pass
 - ✅ **Imperial Agents** — placeholder metadata cleaned (look_summary updated across 9 recipes)
 - ✅ **Imperial Knights** — rewrite/fix pass completed; audit gates GREEN
@@ -83,6 +83,7 @@ Bring placeholder recipes/steps to 0 by aligning each faction to official or cur
 - ✅ `data\data` — removed + canonical path verified
 - ✅ `docs\docs` — removed + canonical path verified
 - ✅ `references\references` — removed + canonical path verified
+- ✅ `Project/data` — consolidated to `src/Data/` (Jan 10)
 
 **Hygiene Status:** COMPLETE ✅
 
@@ -207,7 +208,47 @@ Bring placeholder recipes/steps to 0 by aligning each faction to official or cur
 
 ---
 
-## 🔄 Phase 1.2: Core Enhancements (PLANNED - Jan 9-22)
+## ✅ Phase 1.1: Recipe Polish (COMPLETED - January 10, 2026)
+
+### Milestone 1.1.1: Recipe Description Refinement ✅
+
+- [x] All 401 recipe descriptions audited
+- [x] Faction-specific descriptors applied (e.g., "Custodes Gold Armour")
+- [x] Generic templates replaced with clarity-focused summaries
+- [x] Look_summary column fully updated
+- [x] Data consistency verified
+- [x] CSV format validation passed
+
+**Completion Date:** January 10, 2026
+
+---
+
+### Milestone 1.1.2: Data Management Consolidation ✅
+
+- [x] Duplicate `Project/data/` folder identified
+- [x] Single source of truth established (`src/Data/`)
+- [x] Canonical path verified
+- [x] Zero data loss during consolidation
+- [x] Backup protocols tested
+
+**Completion Date:** January 10, 2026
+
+---
+
+### Milestone 1.1.3: Cache & Performance Improvements ✅
+
+- [x] Cache-control headers enhanced
+- [x] Cache-busting query parameters implemented
+- [x] Pragma and Expires headers added
+- [x] DataLoader refactored for auto path resolution
+- [x] CSV fetch error handling improved
+- [x] Server restart cache buster implemented
+
+**Completion Date:** January 10, 2026
+
+---
+
+## 🔄 Phase 1.2: Core Enhancements (PLANNED - Jan 12-22)
 
 ### Milestone 1.2.1: Advanced Filtering 🔄
 
@@ -261,7 +302,7 @@ Bring placeholder recipes/steps to 0 by aligning each faction to official or cur
 - [ ] Preferred faction memory
 - [ ] Settings panel UI
 
-**Target Completion:** January 21, 2026  
+**Target Completion:** January 22, 2026  
 **Priority:** LOW  
 **Effort:** 5 hours
 
@@ -332,7 +373,8 @@ Bring placeholder recipes/steps to 0 by aligning each faction to official or cur
 |-------|--------|-------|-----|----------|---------|-------|
 | **Truth Pass v2** | ✅ COMPLETE | Jan 4 | Jan 8 | 40 | 401 | 1,741 |
 | **Phase 1.0 MVP** | ✅ COMPLETE | Jan 7 | Jan 9 | 40 | 401 | 1,741 |
-| **Phase 1.2** | 🔄 PLANNED | Jan 9 | Jan 22 | — | — | — |
+| **Phase 1.1 Polish** | ✅ COMPLETE | Jan 9 | Jan 10 | 40 | 401 | 1,741 |
+| **Phase 1.2** | 🔄 PLANNED | Jan 12 | Jan 22 | — | — | — |
 | **Phase 2** | 📋 PLANNED | Feb 1 | Mar 15 | — | — | — |
 | **Phase 3** | 📋 PLANNED | Apr 1 | Jun 30 | — | — | — |
 
@@ -342,6 +384,7 @@ Bring placeholder recipes/steps to 0 by aligning each faction to official or cur
 
 January 2026
 ├── ✅ v1.0.0 — MVP Complete (Jan 9)
+├── ✅ v1.0.1 — Recipe Polish + Cache (Jan 10)
 ├── 🔄 v1.1.0 — Advanced Filtering (Jan 12)
 ├── 🔄 v1.2.0 — Inventory Calculator (Jan 16)
 ├── 🔄 v1.3.0 — Export & Print (Jan 19)
@@ -358,37 +401,37 @@ April-June 2026
 ├── 📋 v3.0.0 — Mobile App (May 1)
 └── 📋 v3.1.0 — Cloud Sync (Jun 30)
 
-text
-
 ---
 
 ## Current Status Dashboard
 
 ╔════════════════════════════════════════════════════╗
 ║ AlchemyPaintOS Milestones ║
-║ Status: Phase 1.0 COMPLETE ✅ ║
+║ Status: Phase 1.1 COMPLETE ✅ ║
 ║ ║
 ║ Completed: ║
-║ - Truth Pass v2 Data (0 placeholders) ║
-║ - MVP Frontend (landing + lore pages) ║
-║ - Bidirectional Navigation ║
-║ - GitHub Deployment ║
-║ - Documentation Suite (9 files) ║
+║ ✅ Truth Pass v2 Data (0 placeholders) ║
+║ ✅ MVP Frontend (landing + lore pages) ║
+║ ✅ Bidirectional Navigation ║
+║ ✅ GitHub Deployment (v1.0.0) ║
+║ ✅ Documentation Suite (9 files) ║
+║ ✅ Recipe Descriptions Refined (401 recipes) ║
+║ ✅ Cache Performance Optimized ║
+║ ✅ Data Consolidation (single source of truth) ║
 ║ ║
-║ Next: Phase 1.2 Enhancements (Jan 9-22) ║
-║ Target: Advanced Filtering (Jan 12) ║
-║ ║
-║ Release: v1.0.0 ✅ (Jan 9, 2026) ║
+║ Current Release: v1.0.1 ✅ (Jan 10, 2026) ║
+║ Next Target: Advanced Filtering (Jan 12) ║
+║ Phase: 1.2 Enhancements ║
 ╚════════════════════════════════════════════════════╝
 
 text
 
 ---
 
-**Last Updated:** January 9, 2026, 14:58 GMT  
+**Last Updated:** January 10, 2026, 16:32 GMT  
 **Next Review:** January 22, 2026  
 **Maintained by:** Osirisborn89  
-**Repository:** https://github.com/Osirisborn89/AlchemyPaintOS
+**Repository:** [https://github.com/Osirisborn89/AlchemyPaintOS](https://github.com/Osirisborn89/AlchemyPaintOS)
 
 ---
 

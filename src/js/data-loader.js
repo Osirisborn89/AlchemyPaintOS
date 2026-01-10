@@ -7,8 +7,8 @@ class DataLoader {
     this.recipesByFaction = {};
     this.inventoryMap = {};
     this.loaded = false;
+    this.cacheBuster = Math.random().toString(36).substr(2, 9);
   }
-
 
   parseCSV(csvText) {
     const lines = csvText.trim().split('\n');
@@ -25,7 +25,6 @@ class DataLoader {
     }
     return rows;
   }
-
 
   parseCSVLine(line) {
     const result = [];
@@ -52,9 +51,22 @@ class DataLoader {
     return result;
   }
 
+  async fetchCSV(filename) {
+    const url = `/data/${filename}?cb=${this.cacheBuster}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to load ${filename}: ${response.statusText}`);
+    }
+    return await response.text();
+  }
 
-  async loadAllData(recipesCSV, recipeStepsCSV, inventoryCSV, factionsCSV) {
+  async loadAllData() {
     try {
+      const recipesCSV = await this.fetchCSV('recipes.csv');
+      const recipeStepsCSV = await this.fetchCSV('recipe_steps.csv');
+      const inventoryCSV = await this.fetchCSV('inventory_export.csv');
+      const factionsCSV = await this.fetchCSV('factions_lore.csv');
+      
       this.recipes = this.parseCSV(recipesCSV);
       this.recipeSteps = this.parseCSV(recipeStepsCSV);
       this.inventory = this.parseCSV(inventoryCSV);
@@ -69,7 +81,6 @@ class DataLoader {
       return false;
     }
   }
-
 
   normalizePrimer(paintName) {
     const primerMap = {
@@ -86,14 +97,12 @@ class DataLoader {
     return primerMap[paintName] || paintName;
   }
 
-
   normalizeBrand(brand, stage) {
     if ((stage || '').toLowerCase() === 'prime' && brand === 'AK Interactive') {
       return 'Any';
     }
     return brand;
   }
-
 
   normalizeData() {
     this.recipes = this.recipes.map(r => ({
@@ -108,7 +117,6 @@ class DataLoader {
       description: r['look_summary'] || ''
     }));
 
-
     this.recipeSteps = this.recipeSteps.map(s => {
       const isPrime = (s['stage'] || '').toLowerCase() === 'prime';
       return {
@@ -122,7 +130,6 @@ class DataLoader {
       };
     });
 
-
     this.inventory = this.inventory.map(p => ({
       id: `${p['Brand']}_${p['Paint Name']}`.replace(/\s+/g, '_'),
       brand: (p['Brand'] || '').trim(),
@@ -131,7 +138,6 @@ class DataLoader {
       count: parseInt(p['Count'] || 1),
       line: (p['Line'] || '').trim()
     }));
-
 
     // Extract unique factions from recipes instead of parsing factions CSV
     const uniqueFactions = {};
@@ -142,7 +148,6 @@ class DataLoader {
       }
     });
 
-
     this.factions = Object.keys(uniqueFactions).map(name => ({
       id: name.toLowerCase().replace(/\s+/g, '_'),
       name: name,
@@ -151,7 +156,6 @@ class DataLoader {
       lore: ''
     })).sort((a, b) => a.name.localeCompare(b.name));
   }
-
 
   buildLookups() {
     this.recipesByFaction = {};
@@ -167,26 +171,21 @@ class DataLoader {
     });
   }
 
-
   getRecipesByFaction(factionName) {
     return this.recipesByFaction[factionName] || [];
   }
-
 
   getRecipeSteps(recipeId) {
     return this.recipeSteps.filter(s => s.recipeId === recipeId);
   }
 
-
   getPaint(paintId) {
     return this.inventoryMap[paintId] || null;
   }
 
-
   getAllFactions() {
     return this.factions.sort((a, b) => a.name.localeCompare(b.name));
   }
-
 
   searchRecipes(query) {
     const q = query.toLowerCase();
