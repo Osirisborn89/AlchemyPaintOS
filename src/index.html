@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AlchemyPaintOS - Warhammer 40K Painting Reference</title>
+  <title>AlchemyPaintOS</title>
   <link rel="stylesheet" href="styles/design-system.css">
   <style>
     body {
@@ -13,14 +13,51 @@
       background-repeat: no-repeat;
       background-position: center;
     }
+
+
+    .header-logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-right: var(--space-lg);
+    }
+
+
+    .header-title-group {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+
+    .header-title-group h1 {
+      margin: 0;
+      font-size: 3.5rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+
+    .header-tagline {
+      color: var(--color-text-secondary);
+      font-size: 1.1rem;
+      margin: var(--space-4) 0 0 0;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="header-content">
-      <div>
-        <h1 class="header-title">⚔️ AlchemyPaintOS</h1>
-        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0; letter-spacing: 0.05em; text-transform: uppercase;">Warhammer 40K Painting Reference</p>
+      <div style="display: flex; align-items: center;">
+        <img src="./assets/logo.png" alt="AlchemyPaintOS Logo" class="header-logo">
+        <div class="header-title-group">
+          <h1 class="header-title">AlchemyPaintOS</h1>
+          <p class="header-tagline">The Painter's Compendium of the Dark Imperium</p>
+        </div>
       </div>
       <a href="lore.html" class="nav-btn">Lore</a>
     </div>
@@ -44,9 +81,15 @@
 
 
     <!-- Placeholder Message (shows until faction selected) -->
-    <section id="placeholder-section" style="text-align: center; padding: var(--space-2xl); margin-top: var(--space-2xl);">
-      <h2 style="color: var(--color-accent-gold); font-size: var(--font-size-2xl); margin-bottom: var(--space-md);">Choose A Faction</h2>
-      <p style="color: var(--color-text-secondary); font-size: var(--font-size-base);">Select a faction from the dropdown above to view painting recipes</p>
+    <section id="placeholder-section" style="text-align: center; padding: var(--space-xl); margin-top: var(--space-xl);">
+      <div style="background-color: rgba(5, 8, 15, 0.9); padding: var(--space-xl); border-radius: 0.5rem; border: 1px solid rgba(212, 175, 55, 0.4);">
+        <h2 style="color: var(--color-accent-gold); font-size: var(--font-size-2xl); margin-bottom: var(--space-md);">
+          Choose A Faction
+        </h2>
+        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm);">
+          Select a faction from the dropdown above to view painting recipes
+        </p>
+      </div>
     </section>
 
 
@@ -62,7 +105,7 @@
 
     <!-- Recipe Detail Modal -->
     <div id="recipe-detail-modal" class="modal">
-      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;" id="modal-overlay"></div>
+      <div style="display: none;" id="modal-overlay"></div>
       <div class="modal-content">
         <button id="modal-close" class="modal-close">✕</button>
         <h2 id="modal-recipe-name" style="margin-bottom: var(--space-lg); padding-right: var(--space-lg);"></h2>
@@ -105,7 +148,6 @@
         const searchInput = document.getElementById('search-recipes');
         const factions = this.dataLoader.getAllFactions();
         
-        // Populate faction dropdown
         factions.forEach(f => {
           const opt = document.createElement('option');
           opt.value = f.name;
@@ -114,21 +156,18 @@
         });
 
 
-        // Faction filter listener
         factionSelect.addEventListener('change', (e) => {
           this.currentFilters.faction = e.target.value;
           this.render();
         });
 
 
-        // Search listener
         searchInput.addEventListener('input', (e) => {
           this.currentFilters.search = e.target.value.toLowerCase();
           this.render();
         });
 
 
-        // Modal close listeners
         document.getElementById('modal-close').addEventListener('click', () => {
           document.getElementById('recipe-detail-modal').classList.remove('active');
         });
@@ -146,7 +185,6 @@
         const container = document.getElementById('recipes-container');
 
 
-        // If no faction selected, show placeholder
         if (!this.currentFilters.faction) {
           placeholderSection.style.display = 'block';
           recipesSection.style.display = 'none';
@@ -154,20 +192,17 @@
         }
 
 
-        // Faction is selected, hide placeholder and show recipes
         placeholderSection.style.display = 'none';
         recipesSection.style.display = 'block';
 
 
         let recipes = [...this.dataLoader.recipes];
         
-        // Filter by faction
         if (this.currentFilters.faction) {
           recipes = recipes.filter(r => r.faction === this.currentFilters.faction);
         }
 
 
-        // Filter by search
         if (this.currentFilters.search) {
           recipes = recipes.filter(r => 
             r.name.toLowerCase().includes(this.currentFilters.search) ||
@@ -190,14 +225,13 @@
           card.className = 'card';
           card.style.cursor = 'pointer';
           
-          // Build tags array
           const tags = [this.sanitize(recipe.surface), this.sanitize(recipe.difficulty)];
           if (recipe.finish) tags.push(this.sanitize(recipe.finish));
           const tagsHTML = tags.map(tag => `<span class="card-tag">${tag}</span>`).join('');
           
           card.innerHTML = `
             <div class="card-header">
-             <span class="card-faction-badge">${this.sanitize(recipe.faction)}</span>
+              <span class="card-faction-badge">${this.sanitize(recipe.faction)}</span>
             </div>
             <h3 class="card-title">${this.sanitize(recipe.name)}</h3>
             <p class="card-surface">${this.sanitize(recipe.surface)}</p>
@@ -229,24 +263,24 @@
         document.getElementById('modal-recipe-body').innerHTML = `
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-lg);">
             <div>
-              <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-2xs); text-transform: uppercase; letter-spacing: 0.05em;">Faction</p>
+              <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-2xs); letter-spacing: 0.05em;">Faction</p>
               <p style="font-weight: 600; margin: 0; color: var(--color-accent-gold);">${this.sanitize(recipe.faction)}</p>
             </div>
             <div>
-              <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-2xs); text-transform: uppercase; letter-spacing: 0.05em;">Surface</p>
-              <p style="font-weight: 600; margin: 0; color: var(--color-accent-gold);">${this.sanitize(recipe.surface)}</p>
+              <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-2xs); letter-spacing: 0.05em;">Surface</p>
+              <p style="font-weight: 600; margin: 0; color: var(--color-accent-gold);">${this.dataLoader.capitalize(this.sanitize(recipe.surface))}</p>
             </div>
             <div>
-              <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-2xs); text-transform: uppercase; letter-spacing: 0.05em;">Difficulty</p>
-              <p style="font-weight: 600; margin: 0; color: var(--color-accent-gold);">${this.sanitize(recipe.difficulty)}</p>
+              <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-2xs); letter-spacing: 0.05em;">Difficulty</p>
+              <p style="font-weight: 600; margin: 0; color: var(--color-accent-gold);">${this.dataLoader.capitalize(this.sanitize(recipe.difficulty))}</p>
             </div>
             <div>
-              <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-2xs); text-transform: uppercase; letter-spacing: 0.05em;">Finish</p>
-              <p style="font-weight: 600; margin: 0; color: var(--color-accent-gold);">${this.sanitize(recipe.finish)}</p>
+              <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-2xs); letter-spacing: 0.05em;">Finish</p>
+              <p style="font-weight: 600; margin: 0; color: var(--color-accent-gold);">${this.dataLoader.capitalize(this.sanitize(recipe.finish))}</p>
             </div>
           </div>
           <div style="margin-bottom: var(--space-lg); padding-bottom: var(--space-lg); border-bottom: 2px solid var(--color-accent-gold);">
-            <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-sm); text-transform: uppercase; letter-spacing: 0.05em;">Description</p>
+            <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--space-sm); letter-spacing: 0.05em;">Description</p>
             <p style="line-height: 1.6; margin: 0;">${this.sanitize(recipe.description)}</p>
           </div>
           <h3 style="margin-bottom: var(--space-md); color: var(--color-accent-gold);">Steps (${steps.length})</h3>
