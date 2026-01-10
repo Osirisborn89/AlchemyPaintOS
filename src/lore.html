@@ -8,6 +8,14 @@
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
   <style>
+    body {
+      background-image: url('./assets/grimdark-bg.png');
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
     /* Lore-specific styles */
     .lore-grid {
       display: grid;
@@ -15,6 +23,7 @@
       gap: var(--space-lg);
       padding: var(--space-xl) 0;
     }
+
 
     .faction-tile {
       background-color: var(--color-bg-secondary);
@@ -32,6 +41,7 @@
       overflow: hidden;
     }
 
+
     .faction-tile::before {
       content: '';
       position: absolute;
@@ -43,15 +53,18 @@
       transition: height var(--transition-normal);
     }
 
+
     .faction-tile:hover {
       border-color: var(--color-accent-teal);
       box-shadow: var(--shadow-lg);
       transform: translateY(-6px);
     }
 
+
     .faction-tile:hover::before {
       height: 6px;
     }
+
 
     .faction-tile h3 {
       color: var(--color-text-heading);
@@ -60,6 +73,7 @@
       position: relative;
       z-index: 1;
     }
+
 
     /* Lore modal content styling */
     #modal-body h1 {
@@ -70,9 +84,11 @@
       padding-bottom: var(--space-md);
     }
 
+
     #modal-body h1:first-child {
       margin-top: 0;
     }
+
 
     #modal-body h2 {
       color: var(--color-accent-green);
@@ -80,11 +96,13 @@
       font-size: var(--font-size-lg);
     }
 
+
     #modal-body h3 {
       color: var(--color-accent-teal);
       margin: var(--space-md) 0 var(--space-sm) 0;
       font-size: var(--font-size-md);
     }
+
 
     #modal-body p {
       margin: var(--space-sm) 0;
@@ -92,15 +110,18 @@
       color: var(--color-text-primary);
     }
 
+
     #modal-body ul,
     #modal-body ol {
       margin: var(--space-sm) 0 var(--space-sm) var(--space-lg);
       color: var(--color-text-primary);
     }
 
+
     #modal-body li {
       margin: var(--space-2xs) 0;
     }
+
 
     #modal-body code {
       background-color: var(--color-bg-tertiary);
@@ -110,6 +131,7 @@
       font-family: 'Courier New', monospace;
       font-size: var(--font-size-sm);
     }
+
 
     #modal-body pre {
       background-color: var(--color-bg-tertiary);
@@ -121,6 +143,7 @@
       color: var(--color-accent-teal);
     }
 
+
     #modal-body blockquote {
       border-left: 3px solid var(--color-accent-teal);
       padding-left: var(--space-md);
@@ -129,21 +152,25 @@
       font-style: italic;
     }
 
+
     #modal-body a {
       color: var(--color-accent-teal);
       text-decoration: none;
       transition: color var(--transition-fast);
     }
 
+
     #modal-body a:hover {
       color: var(--color-accent-teal-hover);
       text-decoration: underline;
     }
 
+
     #modal-body strong {
       color: var(--color-accent-green);
       font-weight: 600;
     }
+
 
     #modal-body em {
       color: var(--color-accent-teal);
@@ -158,9 +185,11 @@
     </div>
   </header>
 
+
   <main>
     <div id="grid" class="lore-grid"></div>
   </main>
+
 
   <!-- Lore Modal -->
   <div id="modal" class="modal">
@@ -171,18 +200,22 @@
     </div>
   </div>
 
+
   <script>
     function closeModal() {
       document.getElementById('modal').classList.remove('active');
     }
 
+
     document.getElementById('modal-close').addEventListener('click', closeModal);
     document.getElementById('modal-overlay').addEventListener('click', closeModal);
+
 
     // Keyboard close
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeModal();
     });
+
 
     // Load faction data
     const timestamp = Date.now();
