@@ -26,24 +26,6 @@
 
 ---
 
-## 🚀 Getting Started
-
-### Quick Start (5 seconds)
-
-1. **Clone the repo:**
-   ```bash
-   git clone https://github.com/Osirisborn89/AlchemyPaintOS.git
-   cd AlchemyPaintOS
-Start the local server:
-
-bash
-python server.py
-Open in browser:
-
-text
-http://localhost:8000
-That's it! No dependencies, no build step, no configuration.
-
 📖 Usage
 Landing Page (index.html)
 Search Recipes — Type paint name, color, or technique
@@ -88,41 +70,6 @@ AlchemyPaintOS/
 │   └── ...
 │
 └── 📄 status-dashboard.html      # v1.0.2 status report
-🚀 Quick Start (5 seconds)
-Clone: git clone https://github.com/Osirisborn89/AlchemyPaintOS.git
-
-Run: python server.py
-
-Visit: http://localhost:8000
-
-💾 Data Structure
-recipes.csv
-Contains all 401 recipes with metadata
-
-recipe_steps.csv
-Contains all 1,741 step-by-step instructions
-
-inventory_export.csv
-Contains 315+ paints you own
-
-⚡ Performance
-Metric	Target	Actual
-Page Load	< 1s	0.8s ✅
-Search Response	< 50ms	35ms ✅
-Modal Open	< 100ms	80ms ✅
-Lighthouse Score	> 90	92+ ✅
-🔐 Quality Gates (All GREEN ✅)
-✅ Zero Placeholder Recipes
-
-✅ Zero Placeholder Steps
-
-✅ Zero Orphan Steps
-
-✅ Zero Inventory Misses
-
-✅ 100% Data Integrity
-
-✅ Production Ready
 
 📅 Development Roadmap
 Phase 1: MVP (COMPLETE ✅)
@@ -158,26 +105,6 @@ Data — CSV (portable, editable in Excel/LibreOffice)
 
 Design — CSS Variables (dark theme, responsive)
 
-🤝 Contributing
-Contributions welcome! See CONTRIBUTING.md
-
-Quality Checklist
- All 401 recipes have steps
-
- All 40 factions discoverable
-
- No placeholder data
-
- No orphan steps
-
- CSV files valid
-
- Navigation works
-
- Search < 50ms
-
- Page load < 1s
-
 📊 Current Status
 Version: v1.0.2
 Status: Production Ready ✅
@@ -203,30 +130,11 @@ CHANGELOG.md — Version history
 
 STATUS.md — Visual status dashboard
 
-🐛 Troubleshooting
-Server won't start
-bash
-python --version
-python3 server.py
-Port 8000 already in use
-bash
-python server.py --port 8080
-Recipe data not loading
-Check CSV files exist in src/Data/
-
-Check browser console (F12)
-
-📞 Support
-Issues: GitHub Issues
-
-Discussions: GitHub Discussions
-
 📜 License
 MIT License — See LICENSE file for details
 
-<div align="center">
 For the Emperor! ⚔️🌟
 
 Made with 🖤 for Warhammer 40K painters
 
-</div> ```
+```
