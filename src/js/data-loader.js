@@ -10,98 +10,63 @@ class DataLoader {
     this.cacheBuster = Math.random().toString(36).substr(2, 9);
   }
 
-  parseCSV(csvText) {
-    const lines = csvText.trim().split('\n');
-    if (lines.length < 2) return [];
-    const headers = this.parseCSVLine(lines[0]);
-    const rows = [];
-    for (let i = 1; i < lines.length; i++) {
-      const values = this.parseCSVLine(lines[i]);
-      const row = {};
-      headers.forEach((header, idx) => {
-        row[header.trim()] = values[idx] ? values[idx].trim() : '';
-      });
-      rows.push(row);
-    }
-    return rows;
-  }
-
-  parseCSVLine(line) {
-    const result = [];
-    let current = '';
-    let insideQuotes = false;
-    for (let i = 0; i < line.length; i++) {
-      const char = line[i];
-      const nextChar = line[i + 1];
-      if (char === '"') {
-        if (insideQuotes && nextChar === '"') {
-          current += '"';
-          i++;
-        } else {
-          insideQuotes = !insideQuotes;
-        }
-      } else if (char === ',' && !insideQuotes) {
-        result.push(current);
-        current = '';
-      } else {
-        current += char;
-      }
-    }
-    result.push(current);
-    return result;
-  }
-
   async fetchCSV(filename) {
-    const url = `/data/${filename}?cb=${this.cacheBuster}`;
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Failed to load ${filename}: ${response.statusText}`);
+    const url = `./Data/${filename}?cb=${this.cacheBuster}`;
+    console.log(`📥 Fetching: ${url}`);
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Failed to load ${filename}: ${response.status} ${response.statusText}`);
+      }
+      const text = await response.text();
+      console.log(`✓ Loaded ${filename}: ${text.split('\n').length} lines`);
+      return text;
+    } catch (error) {
+      console.error(`✗ Fetch failed for ${filename}:`, error);
+      throw error;
     }
-    return await response.text();
   }
 
   async loadAllData() {
     try {
+      console.log('🎨 Starting data load...');
       const recipesCSV = await this.fetchCSV('recipes.csv');
       const recipeStepsCSV = await this.fetchCSV('recipe_steps.csv');
-      const inventoryCSV = await this.fetchCSV('inventory_export.csv');
-      const factionsCSV = await this.fetchCSV('factions_lore.csv');
       
-      this.recipes = this.parseCSV(recipesCSV);
-      this.recipeSteps = this.parseCSV(recipeStepsCSV);
-      this.inventory = this.parseCSV(inventoryCSV);
-      this.factions = this.parseCSV(factionsCSV);
+      let inventoryCSV = '';
+      try {
+        inventoryCSV = await this.fetchCSV('inventory/inventory_export.csv');
+      } catch (err) {
+        console.log('ℹ Inventory file not found - continuing without it');
+        inventoryCSV = 'id,name\n';
+      }
+      
+      const recipesResult = Papa.parse(recipesCSV, { header: true, skipEmptyLines: true });
+      const stepsResult = Papa.parse(recipeStepsCSV, { header: true, skipEmptyLines: true });
+      const inventoryResult = Papa.parse(inventoryCSV, { header: true, skipEmptyLines: true });
+      
+      this.recipes = recipesResult.data || [];
+      this.recipeSteps = stepsResult.data || [];
+      this.inventory = inventoryResult.data || [];
+      
+      console.log(`📊 Raw data parsed:`);
+      console.log(`  - ${this.recipes.length} recipes`);
+      console.log(`  - ${this.recipeSteps.length} recipe steps`);
+      console.log(`  - ${this.inventory.length} paints`);
+      
       this.normalizeData();
       this.buildLookups();
       this.loaded = true;
-      console.log(`✓ Data loaded: ${this.recipes.length} recipes, ${this.inventory.length} paints, ${this.factions.length} factions`);
+      
+      console.log(`✓ Data loaded successfully:`);
+      console.log(`  - ${this.recipes.length} normalized recipes`);
+      console.log(`  - ${this.factions.length} factions found`);
+      
       return true;
     } catch (error) {
-      console.error('Data loading failed:', error);
-      return false;
+      console.error('✗ Data loading failed:', error);
+      throw error;
     }
-  }
-
-  normalizePrimer(paintName) {
-    const primerMap = {
-      'Rubber Black': 'Black Primer',
-      'Anthracite Grey': 'Grey Primer',
-      'Corax White': 'White Primer',
-      'Smoke Black': 'Black Primer',
-      'Bold Titanium White': 'White Primer',
-      'Greenish White': 'White Primer',
-      'Transparent Black': 'Black Primer',
-      'White': 'White Primer',
-      'Black': 'Black Primer'
-    };
-    return primerMap[paintName] || paintName;
-  }
-
-  normalizeBrand(brand, stage) {
-    if ((stage || '').toLowerCase() === 'prime' && brand === 'AK Interactive') {
-      return 'Any';
-    }
-    return brand;
   }
 
   capitalize(str) {
@@ -110,56 +75,51 @@ class DataLoader {
   }
 
   normalizeData() {
-    this.recipes = this.recipes.map(r => ({
-      id: r['recipe_id'] || '',
-      name: r['look_summary'] || r['recipe_id'] || '',
-      faction: (r['faction'] || '').trim(),
-      surface: (r['surface'] || '').toLowerCase(),
-      difficulty: (r['difficulty'] || '').toLowerCase(),
-      timeMode: (r['time_mode'] || '').toLowerCase(),
-      finish: (r['finish'] || '').toLowerCase(),
-      style: (r['style'] || ''),
-      description: r['look_summary'] || ''
-    }));
+    this.recipes = this.recipes
+      .filter(r => r.recipe_id && r.recipe_id.trim())
+      .map(r => ({
+        id: r.recipe_id || '',
+        name: r.look_summary || r.recipe_id || '',
+        faction: (r.faction || '').trim(),
+        surface: (r.surface || '').toLowerCase(),
+        difficulty: (r.difficulty || '').toLowerCase(),
+        timeMode: (r.time_mode || '').toLowerCase(),
+        finish: (r.finish || '').toLowerCase(),
+        style: (r.style || ''),
+        description: r.look_summary || ''
+      }));
 
-    this.recipeSteps = this.recipeSteps.map(s => {
-      const isPrime = (s['stage'] || '').toLowerCase() === 'prime';
-      return {
-        recipeId: s['recipe_id'] || '',
-        stepNumber: parseInt(s['step_no'] || 0),
-        stage: (s['stage'] || '').toLowerCase(),
-        action: (s['action'] || ''),
-        paint: isPrime ? this.normalizePrimer(s['paint'] || '') : (s['paint'] || ''),
-        brand: isPrime ? this.normalizeBrand(s['brand'] || '', s['stage']) : (s['brand'] || ''),
-        description: s['method_notes'] || ''
-      };
-    });
+    this.recipeSteps = this.recipeSteps
+      .filter(s => s.recipe_id && s.recipe_id.trim())
+      .map(s => ({
+        recipeId: s.recipe_id || '',
+        stepNumber: parseInt(s.step_no || 0),
+        stage: (s.stage || '').toLowerCase(),
+        action: (s.action || ''),
+        paint: (s.paint || ''),
+        brand: (s.brand || ''),
+        description: s.method_notes || ''
+      }));
 
-    this.inventory = this.inventory.map(p => ({
-      id: `${p['Brand']}_${p['Paint Name']}`.replace(/\s+/g, '_'),
-      brand: (p['Brand'] || '').trim(),
-      name: (p['Paint Name'] || '').trim(),
-      type: (p['Type'] || '').toLowerCase(),
-      count: parseInt(p['Count'] || 1),
-      line: (p['Line'] || '').trim()
-    }));
-
-    // Extract unique factions from recipes instead of parsing factions CSV
     const uniqueFactions = {};
     this.recipes.forEach(r => {
-      const factionName = (r['faction'] || '').trim();
+      const factionName = (r.faction || '').trim();
       if (factionName && !uniqueFactions[factionName]) {
         uniqueFactions[factionName] = true;
       }
     });
 
-    this.factions = Object.keys(uniqueFactions).map(name => ({
-      id: name.toLowerCase().replace(/\s+/g, '_'),
-      name: name,
-      keyThemes: [],
-      notableUnits: [],
-      lore: ''
-    })).sort((a, b) => a.name.localeCompare(b.name));
+    this.factions = Object.keys(uniqueFactions)
+      .map(name => ({
+        id: name.toLowerCase().replace(/\s+/g, '_'),
+        name: name,
+        keyThemes: [],
+        notableUnits: [],
+        lore: ''
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    console.log(`✓ Normalized ${this.factions.length} factions:`, this.factions.map(f => f.name));
   }
 
   buildLookups() {
@@ -170,10 +130,17 @@ class DataLoader {
       }
       this.recipesByFaction[recipe.faction].push(recipe);
     });
+
     this.inventoryMap = {};
     this.inventory.forEach(paint => {
-      this.inventoryMap[paint.id] = paint;
+      if (paint.id) {
+        this.inventoryMap[paint.id] = paint;
+      }
     });
+  }
+
+  getAllFactions() {
+    return this.factions.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   getRecipesByFaction(factionName) {
@@ -181,19 +148,18 @@ class DataLoader {
   }
 
   getRecipeSteps(recipeId) {
-    return this.recipeSteps.filter(s => s.recipeId === recipeId);
+    return this.recipeSteps.filter(s => s.recipeId === recipeId).sort((a, b) => a.stepNumber - b.stepNumber);
   }
 
   getPaint(paintId) {
     return this.inventoryMap[paintId] || null;
   }
 
-  getAllFactions() {
-    return this.factions.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
   searchRecipes(query) {
     const q = query.toLowerCase();
-    return this.recipes.filter(r => r.name.toLowerCase().includes(q) || r.description.toLowerCase().includes(q));
+    return this.recipes.filter(r => 
+      r.name.toLowerCase().includes(q) || 
+      r.description.toLowerCase().includes(q)
+    );
   }
 }

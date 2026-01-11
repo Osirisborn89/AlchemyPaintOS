@@ -1,3 +1,4 @@
+xml
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AlchemyPaintOS</title>
   <link rel="stylesheet" href="styles/design-system.css">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
     body {
       background-image: url('./assets/grimdark-bg.png');
@@ -14,7 +16,6 @@
       background-position: center;
     }
 
-
     .header-logo {
       width: 100px;
       height: 100px;
@@ -22,13 +23,11 @@
       margin-right: var(--space-lg);
     }
 
-
     .header-title-group {
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-
 
     .header-title-group h1 {
       margin: 0;
@@ -38,7 +37,6 @@
       font-weight: 700;
     }
 
-
     .header-tagline {
       color: var(--color-text-secondary);
       font-size: 1.1rem;
@@ -46,6 +44,33 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
       font-weight: 500;
+    }
+
+    #recipe-detail-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+    }
+
+    #recipe-detail-modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #recipe-detail-modal.active #modal-overlay {
+      display: block;
+    }
+
+    .modal-content {
+      z-index: 1001;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
     }
   </style>
 </head>
@@ -63,7 +88,6 @@
     </div>
   </header>
 
-
   <main>
     <!-- Search & Filter Section -->
     <section class="search-section">
@@ -79,7 +103,6 @@
       </div>
     </section>
 
-
     <!-- Placeholder Message (shows until faction selected) -->
     <section id="placeholder-section" style="text-align: center; padding: var(--space-xl); margin-top: var(--space-xl);">
       <div style="background-color: rgba(5, 8, 15, 0.9); padding: var(--space-xl); border-radius: 0.5rem; border: 1px solid rgba(212, 175, 55, 0.4);">
@@ -92,7 +115,6 @@
       </div>
     </section>
 
-
     <!-- Recipe Cards Section (hidden until faction selected) -->
     <section id="recipes-section" style="display: none;">
       <div id="recipes-container" class="card-grid">
@@ -102,10 +124,9 @@
       </div>
     </section>
 
-
     <!-- Recipe Detail Modal -->
     <div id="recipe-detail-modal" class="modal">
-      <div style="display: none;" id="modal-overlay"></div>
+      <div id="modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; display: none;"></div>
       <div class="modal-content">
         <button id="modal-close" class="modal-close">✕</button>
         <h2 id="modal-recipe-name" style="margin-bottom: var(--space-lg); padding-right: var(--space-lg);"></h2>
@@ -114,18 +135,17 @@
     </div>
   </main>
 
-
   <footer style="padding: var(--space-lg); color: var(--color-text-secondary); font-size: var(--font-size-xs); border-top: 2px solid var(--color-accent-gold); text-align: center; text-transform: uppercase; letter-spacing: 0.05em;">
     <div id="footer-status">Initializing...</div>
   </footer>
 
-
+  <!-- LOAD DATA-LOADER FIRST (before app script) -->
   <script src="js/data-loader.js"></script>
+  
   <script>
     const app = {
       dataLoader: null,
       currentFilters: { faction: '', search: '' },
-
 
       async init() {
         console.log('🎨 Initializing AlchemyPaintOS...');
@@ -134,6 +154,11 @@
           const loaded = await this.dataLoader.loadAllData();
           if (!loaded) throw new Error('Data loader failed');
           
+          this.dataLoader.recipes = this.dataLoader.recipes.filter(recipe => {
+            const steps = this.dataLoader.getRecipeSteps(recipe.id);
+            return steps && steps.length > 0;
+          });
+          
           this.setup();
           document.getElementById('footer-status').textContent = `✓ Ready - ${this.dataLoader.recipes.length} recipes, ${this.dataLoader.getAllFactions().length} factions`;
         } catch (error) {
@@ -141,7 +166,6 @@
           document.getElementById('footer-status').textContent = `✗ Failed: ${error.message}`;
         }
       },
-
 
       setup() {
         const factionSelect = document.getElementById('faction-select');
@@ -155,35 +179,31 @@
           factionSelect.appendChild(opt);
         });
 
-
         factionSelect.addEventListener('change', (e) => {
           this.currentFilters.faction = e.target.value;
           this.render();
         });
-
 
         searchInput.addEventListener('input', (e) => {
           this.currentFilters.search = e.target.value.toLowerCase();
           this.render();
         });
 
-
-        document.getElementById('modal-close').addEventListener('click', () => {
+        const closeModal = () => {
           document.getElementById('recipe-detail-modal').classList.remove('active');
-        });
+        };
 
-
-        document.getElementById('modal-overlay').addEventListener('click', () => {
-          document.getElementById('recipe-detail-modal').classList.remove('active');
+        document.getElementById('modal-close').addEventListener('click', closeModal);
+        document.getElementById('modal-overlay').addEventListener('click', closeModal);
+        document.getElementById('recipe-detail-modal').addEventListener('click', (e) => {
+          if (e.target.id === 'recipe-detail-modal') closeModal();
         });
       },
-
 
       render() {
         const placeholderSection = document.getElementById('placeholder-section');
         const recipesSection = document.getElementById('recipes-section');
         const container = document.getElementById('recipes-container');
-
 
         if (!this.currentFilters.faction) {
           placeholderSection.style.display = 'block';
@@ -191,17 +211,14 @@
           return;
         }
 
-
         placeholderSection.style.display = 'none';
         recipesSection.style.display = 'block';
-
 
         let recipes = [...this.dataLoader.recipes];
         
         if (this.currentFilters.faction) {
           recipes = recipes.filter(r => r.faction === this.currentFilters.faction);
         }
-
 
         if (this.currentFilters.search) {
           recipes = recipes.filter(r => 
@@ -210,15 +227,12 @@
           );
         }
 
-
         container.innerHTML = '';
-
 
         if (recipes.length === 0) {
           container.innerHTML = '<div class="card" style="grid-column: 1 / -1; text-align: center;"><p style="color: var(--color-text-secondary);">No recipes found for this faction</p></div>';
           return;
         }
-
 
         recipes.forEach(recipe => {
           const card = document.createElement('div');
@@ -244,9 +258,8 @@
         });
       },
 
-
       showDetail(recipe) {
-        document.getElementById('modal-recipe-name').textContent = this.sanitize(recipe.name);
+        document.getElementById('modal-recipe-name').textContent = recipe.name;
         const steps = this.dataLoader.getRecipeSteps(recipe.id);
         
         const stepsHTML = steps.length ? steps.map((s, idx) => `
@@ -258,7 +271,6 @@
             <p style="font-size: var(--font-size-sm); margin-top: var(--space-sm);">${this.sanitize(s.description)}</p>
           </div>
         `).join('') : '<p style="color: var(--color-text-secondary);">No steps available</p>';
-
 
         document.getElementById('modal-recipe-body').innerHTML = `
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-lg);">
@@ -289,14 +301,12 @@
         document.getElementById('recipe-detail-modal').classList.add('active');
       },
 
-
       sanitize(text) {
         const div = document.createElement('div');
         div.textContent = text || '';
         return div.innerHTML;
       }
     };
-
 
     document.addEventListener('DOMContentLoaded', () => app.init());
   </script>
